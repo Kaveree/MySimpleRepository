@@ -5,7 +5,7 @@
 <!--property name="tibco.env.projectName" value="${projectName}"/-->
 <property name="templatename" value="https://github.com/Kaveree/MySimpleRepository/blob/master"/>
 <!--property name="env.BWPROJECT" value="C:\Users\kbelamka\Documents\AntTasks\BWProjects" /-->
-<property name="unzip-destination" value="C:\Users\kbelamka\Documents\AntTasks\BWProjects\${projectName}" />
+<property name="unzip-destination" value="C:\Users\kbelamka\Documents\AntTasks\MYRemoteGitRepository\AllProjects\${projectName}" />
 	<target name="ProjectCreation" >
 		<!--arg value="${arg0}"/-->
 		<!--mkdir dir="C:\Users\kbelamka\Documents\AntTasks\BWProjects\${tibco.env.projectName}"/-->
