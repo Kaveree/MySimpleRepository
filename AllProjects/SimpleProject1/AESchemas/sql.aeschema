@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Repository:repository xmlns:Repository="http://www.tibco.com/xmlns/repo/types/2002" xmlns="http://www.tibco.com/xmlns/aemeta/types/2002">
+    <AESchema:scalar xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="BIGINT">
+        <AESchema:dataTypeName>BIGINT</AESchema:dataTypeName>
+        <AESchema:javaClass>java.lang.Long</AESchema:javaClass>
+    </AESchema:scalar>
+    <AESchema:scalar xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="BIT">
+        <AESchema:dataTypeName>BIT</AESchema:dataTypeName>
+        <AESchema:javaClass>java.lang.Boolean</AESchema:javaClass>
+    </AESchema:scalar>
+    <AESchema:scalar xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="DATE">
+        <AESchema:dataTypeName>DATE</AESchema:dataTypeName>
+        <AESchema:javaClass>java.sql.Date</AESchema:javaClass>
+    </AESchema:scalar>
+    <AESchema:scalar xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="DOUBLE PRECISION">
+        <AESchema:dataTypeName>DOUBLE PRECISION</AESchema:dataTypeName>
+        <AESchema:javaClass>java.lang.Double</AESchema:javaClass>
+    </AESchema:scalar>
+    <AESchema:scalar xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="FLOAT">
+        <AESchema:dataTypeName>FLOAT</AESchema:dataTypeName>
+        <AESchema:javaClass>java.lang.Float</AESchema:javaClass>
+    </AESchema:scalar>
+    <AESchema:scalar xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="INTEGER">
+        <AESchema:dataTypeName>INTEGER</AESchema:dataTypeName>
+        <AESchema:javaClass>java.lang.Integer</AESchema:javaClass>
+    </AESchema:scalar>
+    <AESchema:scalar xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="LONGVARBINARY">
+        <AESchema:dataTypeName>LONGVARBINARY</AESchema:dataTypeName>
+        <AESchema:javaClass>java.lang.Byte[]</AESchema:javaClass>
+    </AESchema:scalar>
+    <AESchema:scalar xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="LONGVARCHAR">
+        <AESchema:dataTypeName>LONGVARCHAR</AESchema:dataTypeName>
+        <AESchema:javaClass>java.lang.String</AESchema:javaClass>
+    </AESchema:scalar>
+    <AESchema:scalar xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="REAL">
+        <AESchema:dataTypeName>REAL</AESchema:dataTypeName>
+        <AESchema:javaClass>java.lang.Float</AESchema:javaClass>
+    </AESchema:scalar>
+    <AESchema:scalar xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="SMALLINT">
+        <AESchema:dataTypeName>SMALLINT</AESchema:dataTypeName>
+        <AESchema:javaClass>java.lang.Short</AESchema:javaClass>
+    </AESchema:scalar>
+    <AESchema:scalar xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="TIME">
+        <AESchema:dataTypeName>TIME</AESchema:dataTypeName>
+        <AESchema:javaClass>java.sql.Time</AESchema:javaClass>
+    </AESchema:scalar>
+    <AESchema:scalar xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="TIMESTAMP">
+        <AESchema:dataTypeName>TIMESTAMP</AESchema:dataTypeName>
+        <AESchema:javaClass>java.sql.Timestamp</AESchema:javaClass>
+    </AESchema:scalar>
+    <AESchema:scalar xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="TINYINT">
+        <AESchema:dataTypeName>TINYINT</AESchema:dataTypeName>
+        <AESchema:javaClass>java.lang.Short</AESchema:javaClass>
+    </AESchema:scalar>
+    <AESchema:scalar xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="VARBINARY">
+        <AESchema:dataTypeName>VARBINARY</AESchema:dataTypeName>
+        <AESchema:javaClass>java.lang.Byte[]</AESchema:javaClass>
+    </AESchema:scalar>
+    <AESchema:scalar xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="VARCHAR">
+        <AESchema:dataTypeName>VARCHAR</AESchema:dataTypeName>
+        <AESchema:javaClass>java.lang.String</AESchema:javaClass>
+    </AESchema:scalar>
+    <designer>
+        <lockedProperties></lockedProperties>
+        <fixedChildren>
+            <fixed value="Associations,Classes,Scalars,Sequences,Unions"></fixed>
+        </fixedChildren>
+    </designer>
+</Repository:repository>
