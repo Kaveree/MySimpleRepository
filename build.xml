@@ -23,8 +23,6 @@
 			<!--get src="${templatename}/Template.designertemplate" dest="C:\Users\kbelamka\Documents\AntTasks\BWProjects\Newfolder\Repository" skipexisting="true" verbose="true" username="Kaveree" password="Kaveree94"/-->
 		<!--get src="${templatename}/Template1.designertemplate" dest="C:\Users\kbelamka\Documents\AntTasks\BWProjects\Newfolder\Repository" username="Kaveree" password="Kaveree94"/ -->
 		
-		  <!--sshexec host="www.github.com" port="443" username="Kaveree" password="Kaveree94" command="git checkout /Kaveree/MySimpleRepository/blob/master -- Template1.designertemplate" trust="yes"/ -->
-
 			<!--git:settings refId="git.testing"
 				username="Kaveree"PracticeOfJenkins/build.xml
 				password="Kaveree94"
