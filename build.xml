@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<project name="initBWProject" default="ProjectCreation">
+
+
+<!--property name="tibco.env.projectName" value="${projectName}"/-->
+<property name="templatename" value="https://github.com/Kaveree/MySimpleRepository/blob/master"/>
+<!--property name="env.BWPROJECT" value="C:\Users\kbelamka\Documents\AntTasks\BWProjects" /-->
+<property name="unzip-destination" value="C:\Users\kbelamka\Documents\AntTasks\BWProjects\SimpleProject2" />
+	<target name="ProjectCreation" >
+		<!--arg value="${arg0}"/-->
+		<!--mkdir dir="C:\Users\kbelamka\Documents\AntTasks\BWProjects\${tibco.env.projectName}"/-->
+		<!--mkdir dir="C:\Users\kbelamka\Documents\AntTasks\BWProjects\${arg0}"/-->
+		<echo message="Initialize project" />
+		<echo message="${templatename}" />
+		<!--echo message="${projectName}" /-->
+		<!--echo message="Copy template project to ${env.BWPROJECT}"/-->
+		<!-- copy the template -->
+		<!--copy todir="${env.BWPROJECT}" overwrite="true">
+			<fileset dir="${templatename}" >
+				<include name="**/*"/>
+			</fileset>
+		</copy-->
+			<!--get src="${templatename}/Template.designertemplate" dest="C:\Users\kbelamka\Documents\AntTasks\BWProjects\Newfolder\Repository" skipexisting="true" verbose="true" username="Kaveree" password="Kaveree94"/-->
+		<!--get src="${templatename}/Template1.designertemplate" dest="C:\Users\kbelamka\Documents\AntTasks\BWProjects\Newfolder\Repository" username="Kaveree" password="Kaveree94"/ -->
+		
+		  <!--sshexec host="www.github.com" port="443" username="Kaveree" password="Kaveree94" command="git checkout /Kaveree/MySimpleRepository/blob/master -- Template1.designertemplate" trust="yes"/ -->
+
+			<!--git:settings refId="git.testing"
+				username="Kaveree"PracticeOfJenkins/build.xml
+				password="Kaveree94"
+				name="xxxtesting"
+			    email="kavereebelamkar20@gmail.com"/>
+			
+			<git:git directory="C:\Users\kbelamka\Documents\AntTasks\MYRemoteGitRepository" verbose="true" settingsRef="git.testing">
+				<git:clone uri="https://github.com/Kaveree/PracticeOfJenkins"/>
+				<git:checkout branchName="Project" createBranch="true"/>
+			</git:git-->
+			 <!--scp file="Kaveree:Kaveree94@192.30.253.112:/Kaveree/PracticeOfJenkins/blob/master/Template.designertemplate" todir="C:\Users\kbelamka\Documents\AntTasks\BWProjects\New folder" port="443" trust="true"/-->
+			
+			<!--*******************UNZIP****************************-->
+			<!--unzip src="C:\Users\kbelamka\Documents\AntTasks\BWProjects\New folder\Template.designertemplate" dest="${unzip-destination}" /-->
+				<unzip src=".\Template1.designertemplate" dest="${unzip-destination}" />				
+		<!--/target -->
+		<!-- search & replace "ProjectTemplate" -->
+		<!--echo message="Configure the project..."/>
+		<replace file="${env.BWPROJECT}/vcrepo.dat" token="${templatename}" value="${env.BWPROJECT}"/>
+		<replace file="${env.BWPROJECT}/.folder" token="${templatename}" value="${env.BWPROJECT}"/>
+		<replace file="${env.BWPROJECT}/defaultVars/defaultVars.substvar" token="${templatename}" value="${env.BWPROJECT}"/-->
+		
+	</target>
+</project>
