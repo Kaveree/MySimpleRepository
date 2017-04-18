@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Repository:repository xmlns:Repository="http://www.tibco.com/xmlns/repo/types/2002" xmlns="http://www.tibco.com/xmlns/aemeta/types/2002">
+    <AESchema:class xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="MBusinessDocument">
+        <AESchema:superclass isRef="true">/AESchemas/ae/baseDocument.aeschema#class.baseBusinessDocument</AESchema:superclass>
+        <AESchema:attribute>
+            <AESchema:isReadable>true</AESchema:isReadable>
+            <AESchema:isWriteable>true</AESchema:isWriteable>
+            <AESchema:name>DataSection</AESchema:name>
+            <AESchema:attributeType isRef="true">/AESchemas/ae/baseDocument.aeschema#sequence.sequence[MDataSection]</AESchema:attributeType>
+        </AESchema:attribute>
+    </AESchema:class>
+    <AESchema:class xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="MDataSection">
+        <AESchema:attribute>
+            <AESchema:isReadable>true</AESchema:isReadable>
+            <AESchema:isWriteable>true</AESchema:isWriteable>
+            <AESchema:name>VerbCode</AESchema:name>
+            <AESchema:attributeType isRef="true">/AESchemas/ae.aeschema#scalar.i4</AESchema:attributeType>
+        </AESchema:attribute>
+        <AESchema:attribute>
+            <AESchema:isReadable>true</AESchema:isReadable>
+            <AESchema:isWriteable>true</AESchema:isWriteable>
+            <AESchema:name>Data</AESchema:name>
+            <AESchema:attributeType isRef="true">/AESchemas/ae.aeschema#scalar.any</AESchema:attributeType>
+        </AESchema:attribute>
+    </AESchema:class>
+    <AESchema:class xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="MAdvisoryDocument">
+        <AESchema:superclass isRef="true">/AESchemas/ae/baseDocument.aeschema#class.baseAdvisoryDocument</AESchema:superclass>
+        <AESchema:attribute>
+            <AESchema:isReadable>true</AESchema:isReadable>
+            <AESchema:isWriteable>true</AESchema:isWriteable>
+            <AESchema:name>Data</AESchema:name>
+            <AESchema:attributeType isRef="true">/AESchemas/ae.aeschema#scalar.any</AESchema:attributeType>
+        </AESchema:attribute>
+    </AESchema:class>
+    <AESchema:class xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="baseAdvisoryDocument">
+        <AESchema:attribute>
+            <AESchema:isReadable>true</AESchema:isReadable>
+            <AESchema:isWriteable>true</AESchema:isWriteable>
+            <AESchema:name>ApplicationInstanceId</AESchema:name>
+            <AESchema:attributeType isRef="true">/AESchemas/ae.aeschema#scalar.string</AESchema:attributeType>
+        </AESchema:attribute>
+        <AESchema:attribute>
+            <AESchema:isReadable>true</AESchema:isReadable>
+            <AESchema:isWriteable>true</AESchema:isWriteable>
+            <AESchema:name>ReferenceId</AESchema:name>
+            <AESchema:attributeType isRef="true">/AESchemas/ae.aeschema#scalar.string</AESchema:attributeType>
+        </AESchema:attribute>
+        <AESchema:attribute>
+            <AESchema:isReadable>true</AESchema:isReadable>
+            <AESchema:isWriteable>true</AESchema:isWriteable>
+            <AESchema:name>Description</AESchema:name>
+            <AESchema:attributeType isRef="true">/AESchemas/ae.aeschema#scalar.string</AESchema:attributeType>
+        </AESchema:attribute>
+        <AESchema:attribute>
+            <AESchema:isReadable>true</AESchema:isReadable>
+            <AESchema:isWriteable>true</AESchema:isWriteable>
+            <AESchema:name>Class</AESchema:name>
+            <AESchema:attributeType isRef="true">/AESchemas/ae.aeschema#scalar.string</AESchema:attributeType>
+        </AESchema:attribute>
+        <AESchema:attribute>
+            <AESchema:isReadable>true</AESchema:isReadable>
+            <AESchema:isWriteable>true</AESchema:isWriteable>
+            <AESchema:name>Severity</AESchema:name>
+            <AESchema:attributeType isRef="true">/AESchemas/ae.aeschema#scalar.i4</AESchema:attributeType>
+        </AESchema:attribute>
+        <AESchema:attribute>
+            <AESchema:isReadable>true</AESchema:isReadable>
+            <AESchema:isWriteable>true</AESchema:isWriteable>
+            <AESchema:name>DateTimeStamp</AESchema:name>
+            <AESchema:attributeType isRef="true">/AESchemas/ae.aeschema#scalar.dateTime</AESchema:attributeType>
+        </AESchema:attribute>
+        <AESchema:attribute>
+            <AESchema:isReadable>true</AESchema:isReadable>
+            <AESchema:isWriteable>true</AESchema:isWriteable>
+            <AESchema:name>Subject</AESchema:name>
+            <AESchema:attributeType isRef="true">/AESchemas/ae.aeschema#scalar.string</AESchema:attributeType>
+        </AESchema:attribute>
+        <AESchema:attribute>
+            <AESchema:isReadable>true</AESchema:isReadable>
+            <AESchema:isWriteable>true</AESchema:isWriteable>
+            <AESchema:name>Name</AESchema:name>
+            <AESchema:attributeType isRef="true">/AESchemas/ae.aeschema#scalar.string</AESchema:attributeType>
+        </AESchema:attribute>
+        <AESchema:attribute>
+            <AESchema:isReadable>true</AESchema:isReadable>
+            <AESchema:isWriteable>true</AESchema:isWriteable>
+            <AESchema:name>ApplicationContext</AESchema:name>
+            <AESchema:attributeType isRef="true">/AESchemas/ae.aeschema#scalar.any</AESchema:attributeType>
+        </AESchema:attribute>
+        <AESchema:attribute>
+            <AESchema:isReadable>true</AESchema:isReadable>
+            <AESchema:isWriteable>true</AESchema:isWriteable>
+            <AESchema:name>Version</AESchema:name>
+            <AESchema:attributeType isRef="true">/AESchemas/ae.aeschema#scalar.i4</AESchema:attributeType>
+        </AESchema:attribute>
+        <AESchema:attribute>
+            <AESchema:isReadable>true</AESchema:isReadable>
+            <AESchema:isWriteable>true</AESchema:isWriteable>
+            <AESchema:name>Analysis</AESchema:name>
+            <AESchema:attributeType isRef="true">/AESchemas/ae.aeschema#scalar.string</AESchema:attributeType>
+        </AESchema:attribute>
+        <AESchema:attribute>
+            <AESchema:isReadable>true</AESchema:isReadable>
+            <AESchema:isWriteable>true</AESchema:isWriteable>
+            <AESchema:name>ApplicationId</AESchema:name>
+            <AESchema:attributeType isRef="true">/AESchemas/ae.aeschema#scalar.string</AESchema:attributeType>
+        </AESchema:attribute>
+    </AESchema:class>
+    <AESchema:class xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="aeAdvisoryDocument">
+        <AESchema:superclass isRef="true">/AESchemas/ae/baseDocument.aeschema#class.baseAdvisoryDocument</AESchema:superclass>
+        <AESchema:attribute>
+            <AESchema:isReadable>true</AESchema:isReadable>
+            <AESchema:isWriteable>true</AESchema:isWriteable>
+            <AESchema:name>Data</AESchema:name>
+            <AESchema:attributeType isRef="true">/AESchemas/ae.aeschema#scalar.any</AESchema:attributeType>
+        </AESchema:attribute>
+    </AESchema:class>
+    <AESchema:class xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="baseBusinessDocument">
+        <AESchema:attribute>
+            <AESchema:isReadable>true</AESchema:isReadable>
+            <AESchema:isWriteable>true</AESchema:isWriteable>
+            <AESchema:name>VerbCode</AESchema:name>
+            <AESchema:attributeType isRef="true">/AESchemas/ae.aeschema#scalar.i4</AESchema:attributeType>
+        </AESchema:attribute>
+        <AESchema:attribute>
+            <AESchema:isReadable>true</AESchema:isReadable>
+            <AESchema:isWriteable>true</AESchema:isWriteable>
+            <AESchema:name>ApplicationInstanceId</AESchema:name>
+            <AESchema:attributeType isRef="true">/AESchemas/ae.aeschema#scalar.string</AESchema:attributeType>
+        </AESchema:attribute>
+        <AESchema:attribute>
+            <AESchema:isReadable>true</AESchema:isReadable>
+            <AESchema:isWriteable>true</AESchema:isWriteable>
+            <AESchema:name>ReferenceId</AESchema:name>
+            <AESchema:attributeType isRef="true">/AESchemas/ae.aeschema#scalar.string</AESchema:attributeType>
+        </AESchema:attribute>
+        <AESchema:attribute>
+            <AESchema:isReadable>true</AESchema:isReadable>
+            <AESchema:isWriteable>true</AESchema:isWriteable>
+            <AESchema:name>Encrypted</AESchema:name>
+            <AESchema:attributeType isRef="true">/AESchemas/ae.aeschema#scalar.boolean</AESchema:attributeType>
+        </AESchema:attribute>
+        <AESchema:attribute>
+            <AESchema:isReadable>true</AESchema:isReadable>
+            <AESchema:isWriteable>true</AESchema:isWriteable>
+            <AESchema:name>DateTimeStamp</AESchema:name>
+            <AESchema:attributeType isRef="true">/AESchemas/ae.aeschema#scalar.dateTime</AESchema:attributeType>
+        </AESchema:attribute>
+        <AESchema:attribute>
+            <AESchema:isReadable>true</AESchema:isReadable>
+            <AESchema:isWriteable>true</AESchema:isWriteable>
+            <AESchema:name>ReplyAddress</AESchema:name>
+            <AESchema:attributeType isRef="true">/AESchemas/ae.aeschema#scalar.string</AESchema:attributeType>
+        </AESchema:attribute>
+        <AESchema:attribute>
+            <AESchema:isReadable>true</AESchema:isReadable>
+            <AESchema:isWriteable>true</AESchema:isWriteable>
+            <AESchema:name>LotEnd</AESchema:name>
+            <AESchema:attributeType isRef="true">/AESchemas/ae.aeschema#scalar.boolean</AESchema:attributeType>
+        </AESchema:attribute>
+        <AESchema:attribute>
+            <AESchema:isReadable>true</AESchema:isReadable>
+            <AESchema:isWriteable>true</AESchema:isWriteable>
+            <AESchema:name>LotId</AESchema:name>
+            <AESchema:attributeType isRef="true">/AESchemas/ae.aeschema#scalar.string</AESchema:attributeType>
+        </AESchema:attribute>
+        <AESchema:attribute>
+            <AESchema:isReadable>true</AESchema:isReadable>
+            <AESchema:isWriteable>true</AESchema:isWriteable>
+            <AESchema:name>ConfirmCode</AESchema:name>
+            <AESchema:attributeType isRef="true">/AESchemas/ae.aeschema#scalar.i4</AESchema:attributeType>
+        </AESchema:attribute>
+        <AESchema:attribute>
+            <AESchema:isReadable>true</AESchema:isReadable>
+            <AESchema:isWriteable>true</AESchema:isWriteable>
+            <AESchema:name>ComponentId</AESchema:name>
+            <AESchema:attributeType isRef="true">/AESchemas/ae.aeschema#scalar.string</AESchema:attributeType>
+        </AESchema:attribute>
+        <AESchema:attribute>
+            <AESchema:isReadable>true</AESchema:isReadable>
+            <AESchema:isWriteable>true</AESchema:isWriteable>
+            <AESchema:name>Name</AESchema:name>
+            <AESchema:attributeType isRef="true">/AESchemas/ae.aeschema#scalar.string</AESchema:attributeType>
+        </AESchema:attribute>
+        <AESchema:attribute>
+            <AESchema:isReadable>true</AESchema:isReadable>
+            <AESchema:isWriteable>true</AESchema:isWriteable>
+            <AESchema:name>ApplicationContext</AESchema:name>
+            <AESchema:attributeType isRef="true">/AESchemas/ae.aeschema#scalar.any</AESchema:attributeType>
+        </AESchema:attribute>
+        <AESchema:attribute>
+            <AESchema:isReadable>true</AESchema:isReadable>
+            <AESchema:isWriteable>true</AESchema:isWriteable>
+            <AESchema:name>Version</AESchema:name>
+            <AESchema:attributeType isRef="true">/AESchemas/ae.aeschema#scalar.i4</AESchema:attributeType>
+        </AESchema:attribute>
+        <AESchema:attribute>
+            <AESchema:isReadable>true</AESchema:isReadable>
+            <AESchema:isWriteable>true</AESchema:isWriteable>
+            <AESchema:name>LotItem</AESchema:name>
+            <AESchema:attributeType isRef="true">/AESchemas/ae.aeschema#scalar.i4</AESchema:attributeType>
+        </AESchema:attribute>
+        <AESchema:attribute>
+            <AESchema:isReadable>true</AESchema:isReadable>
+            <AESchema:isWriteable>true</AESchema:isWriteable>
+            <AESchema:name>ErrorAddress</AESchema:name>
+            <AESchema:attributeType isRef="true">/AESchemas/ae.aeschema#scalar.string</AESchema:attributeType>
+        </AESchema:attribute>
+        <AESchema:attribute>
+            <AESchema:isReadable>true</AESchema:isReadable>
+            <AESchema:isWriteable>true</AESchema:isWriteable>
+            <AESchema:name>ApplicationId</AESchema:name>
+            <AESchema:attributeType isRef="true">/AESchemas/ae.aeschema#scalar.string</AESchema:attributeType>
+        </AESchema:attribute>
+    </AESchema:class>
+    <AESchema:sequence xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="sequence[MDataSection]">
+        <AESchema:elementType isRef="true">/AESchemas/ae/baseDocument.aeschema#class.MDataSection</AESchema:elementType>
+    </AESchema:sequence>
+    <designer>
+        <lockedProperties></lockedProperties>
+        <fixedChildren>
+            <fixed value="Associations,Classes,Scalars,Sequences,Unions"></fixed>
+            <fixed resource="/Classes/baseBusinessDocument" value=""></fixed>
+            <fixed resource="/Classes/aeAdvisoryDocument" value=""></fixed>
+            <fixed resource="/Classes/baseAdvisoryDocument" value=""></fixed>
+            <fixed resource="/Classes/MAdvisoryDocument" value=""></fixed>
+            <fixed resource="/Classes/MDataSection" value=""></fixed>
+            <fixed resource="/Classes/MBusinessDocument" value=""></fixed>
+        </fixedChildren>
+    </designer>
+</Repository:repository>

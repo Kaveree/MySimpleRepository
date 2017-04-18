@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Repository:repository xmlns:Repository="http://www.tibco.com/xmlns/repo/types/2002" xmlns="http://www.tibco.com/xmlns/aemeta/types/2002">
+    <AESchema:scalar xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="any">
+        <AESchema:dataTypeName>any</AESchema:dataTypeName>
+    </AESchema:scalar>
+    <AESchema:scalar xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="boolean">
+        <AESchema:dataTypeName>boolean</AESchema:dataTypeName>
+        <AESchema:javaClass>java.lang.Boolean</AESchema:javaClass>
+    </AESchema:scalar>
+    <AESchema:scalar xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="char">
+        <AESchema:dataTypeName>char</AESchema:dataTypeName>
+        <AESchema:javaClass>java.lang.Character</AESchema:javaClass>
+    </AESchema:scalar>
+    <AESchema:scalar xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="double">
+        <AESchema:dataTypeName>double</AESchema:dataTypeName>
+        <AESchema:javaClass>java.lang.Double</AESchema:javaClass>
+    </AESchema:scalar>
+    <AESchema:scalar xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="float">
+        <AESchema:dataTypeName>float</AESchema:dataTypeName>
+        <AESchema:javaClass>java.lang.Float</AESchema:javaClass>
+    </AESchema:scalar>
+    <AESchema:scalar xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="long">
+        <AESchema:dataTypeName>long</AESchema:dataTypeName>
+        <AESchema:javaClass>java.lang.Integer</AESchema:javaClass>
+    </AESchema:scalar>
+    <AESchema:scalar xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="longlong">
+        <AESchema:dataTypeName>longlong</AESchema:dataTypeName>
+        <AESchema:javaClass>java.lang.Long</AESchema:javaClass>
+    </AESchema:scalar>
+    <AESchema:scalar xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="octet">
+        <AESchema:dataTypeName>octet</AESchema:dataTypeName>
+        <AESchema:javaClass>java.lang.Byte</AESchema:javaClass>
+    </AESchema:scalar>
+    <AESchema:scalar xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="short">
+        <AESchema:dataTypeName>short</AESchema:dataTypeName>
+        <AESchema:javaClass>java.lang.Short</AESchema:javaClass>
+    </AESchema:scalar>
+    <AESchema:scalar xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="string">
+        <AESchema:dataTypeName>string</AESchema:dataTypeName>
+        <AESchema:javaClass>java.lang.String</AESchema:javaClass>
+    </AESchema:scalar>
+    <AESchema:scalar xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="ulong">
+        <AESchema:dataTypeName>ulong</AESchema:dataTypeName>
+        <AESchema:javaClass>java.lang.Long</AESchema:javaClass>
+    </AESchema:scalar>
+    <AESchema:scalar xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="ulonglong">
+        <AESchema:dataTypeName>ulonglong</AESchema:dataTypeName>
+        <AESchema:javaClass>java.lang.Long</AESchema:javaClass>
+    </AESchema:scalar>
+    <AESchema:scalar xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="ushort">
+        <AESchema:dataTypeName>ushort</AESchema:dataTypeName>
+        <AESchema:javaClass>java.lang.Integer</AESchema:javaClass>
+    </AESchema:scalar>
+    <AESchema:scalar xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="wchar">
+        <AESchema:dataTypeName>wchar</AESchema:dataTypeName>
+        <AESchema:javaClass>java.lang.Character</AESchema:javaClass>
+    </AESchema:scalar>
+    <AESchema:scalar xmlns:AESchema="http://www.tibco.com/xmlns/aemeta/types/2002" name="wstring">
+        <AESchema:dataTypeName>wstring</AESchema:dataTypeName>
+        <AESchema:javaClass>java.lang.String</AESchema:javaClass>
+    </AESchema:scalar>
+    <designer>
+        <lockedProperties></lockedProperties>
+        <fixedChildren>
+            <fixed value="Associations,Classes,Scalars,Sequences,Unions"></fixed>
+        </fixedChildren>
+    </designer>
+</Repository:repository>
