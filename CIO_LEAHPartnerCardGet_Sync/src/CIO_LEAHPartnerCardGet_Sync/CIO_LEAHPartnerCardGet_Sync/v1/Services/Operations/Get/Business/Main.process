@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://www.tibco.com/pe/DeployedVarsType" xmlns:ns5="http://soa.coe.com/infra/mediation/CommonServices/StatEventFault" xmlns:ns6="http://accorhotels.com/internal/schema/local/CIO_LEAHBurn4StaySimulate_Sync/v1/Resources/Schemas/XSD/CIO_LEAHBurn4StaySimulate_Sync.xsd" xmlns:pfx="http://soa.coe.com/CommonTypes/Mediation/Framework/BWException" xmlns:ns2="http://soa.coe.com/infra/mediation/CommonServices/StatEvent" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns1="http://www.tibco.com/pe/EngineTypes" xmlns:ns4="http://soa.coe.com/CommonTypes/Mediation/BWProcessContext" xmlns:ns3="http://soa.coe.com/infra/mediation/CommonServices/StatEventEnd" xmlns:bwCustomFunctions="java://com.tibco.tibcobw.customfunctions.bwCustomFunctions" xmlns:pfx5="http://soa.coe.com/infra/mediation/CommonServices/StatEventBegin" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:pfx4="http://accorhotels.com/internal/schema/local/CIO_LEAHPartnerCardGet_Sync/v1" xmlns:pfx3="http://soa.coe.com/CommonTypes/Mediation/Framework" xmlns:pfx2="http://www.tibco.com/pe/GenerateErrorActivity/InputSchema" xmlns:pfx6="http://www.tibco.com/schemas/CIO_LEAHPartnerCardGet_Sync/CIO_LEAHPartnerCardGet_Sync/v1/Resources/Schemas/XSD/CIO_LEAHPartnerCardGet_Sync.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <xsd:import namespace="http://soa.coe.com/CommonTypes/Mediation/Framework/BWException" schemaLocation="/CORE_COMMON/Resources/Schemas/ErrorHandling/bwexception.xsd"/>
+    <xsd:import namespace="http://accorhotels.com/internal/schema/local/CIO_LEAHPartnerCardGet_Sync/v1" schemaLocation="/CIO_LEAHPartnerCardGet_Sync/v1/Resources/Schemas/XSD/Get_CIO_LEAHPartnerCardGet_Sync_v1.xsd"/>
+    <xsd:import namespace="http://accorhotels.com/internal/schema/local/CIO_LEAHBurn4StaySimulate_Sync/v1/Resources/Schemas/XSD/CIO_LEAHBurn4StaySimulate_Sync.xsd" schemaLocation="/CIO_LEAHBurn4StaySimulate_Sync/v1/Resources/Schemas/XSD/CIO_LEAHBurn4StaySimulate_Sync.xsd"/>
+    <xsd:import namespace="http://www.tibco.com/schemas/CIO_LEAHPartnerCardGet_Sync/CIO_LEAHPartnerCardGet_Sync/v1/Resources/Schemas/XSD/CIO_LEAHPartnerCardGet_Sync.xsd" schemaLocation="/CIO_LEAHPartnerCardGet_Sync/v1/Resources/Schemas/XSD/CIO_LEAHPartnerCardGet_Sync.xsd"/>
+    <pd:name>CIO_LEAHPartnerCardGet_Sync/v1/Services/Operations/Get/Business/Main.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType ref="pfx3:InputData"/>
+    <pd:startX>114</pd:startX>
+    <pd:startY>140</pd:startY>
+    <pd:returnBindings>
+        <pfx3:OutputData>
+            <xsl:choose>
+                <xsl:when test="exists($Map-Reply/pfx6:ReplyPartnerCardGetErrorV1_Output)">
+                    <xsl:copy-of select="$Map-Reply/pfx6:ReplyPartnerCardGetErrorV1_Output"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:copy-of select="$Map-Reply/pfx6:ReplyPartnerCardGetV1_Output"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </pfx3:OutputData>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType ref="pfx3:OutputData"/>
+    <pd:endX>802</pd:endX>
+    <pd:endY>145</pd:endY>
+    <pd:errorSchemas>
+        <Exception ref="pfx:bwException"/>
+    </pd:errorSchemas>
+    <pd:processVariables>
+        <VarReply>
+            <xsd:choice>
+                <xsd:element ref="pfx4:Reply"/>
+                <xsd:element ref="pfx4:Error"/>
+            </xsd:choice>
+        </VarReply>
+    </pd:processVariables>
+    <pd:targetNamespace>http://accorhotels.com/CIO_LEAHPartnerCardGet_Sync/v1/Services/Operations/Get/Business/Main</pd:targetNamespace>
+    <pd:activity name="BE">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>330</pd:x>
+        <pd:y>383</pd:y>
+        <config>
+            <processName>/CORE_COMMON/ProcessUtilities/ErrorHandling/BuildError.process</processName>
+        </config>
+        <pd:inputBindings>
+            <input>
+                <pfx:bwBuildError>
+                    <pfx:eventException>
+                        <pfx:code>
+                            <xsl:value-of select="$_error/ns1:ErrorReport/MsgCode"/>
+                        </pfx:code>
+                        <pfx:desc>
+                            <xsl:value-of select="$_error/ns1:ErrorReport/Msg"/>
+                        </pfx:desc>
+                        <pfx:shortDesc>
+                            <xsl:value-of select="&quot;Exception in main&quot;"/>
+                        </pfx:shortDesc>
+                        <pfx:type>
+                            <xsl:value-of select="&quot;T&quot;"/>
+                        </pfx:type>
+                        <pfx:severity>
+                            <xsl:value-of select="4"/>
+                        </pfx:severity>
+                        <pfx:stackTrace>
+                            <xsl:value-of select="tib:render-xml($_error, true(), true())"/>
+                        </pfx:stackTrace>
+                        <pfx:inputData>
+                            <xsl:value-of select="tib:render-xml($Start/pfx3:InputData, true(), true())"/>
+                        </pfx:inputData>
+                        <pfx:debugData xsi:nil="true"/>
+                    </pfx:eventException>
+                </pfx:bwBuildError>
+                <pfx:syncResponseBody>
+                    <xsl:copy-of select="$Create-Error-Response/*"/>
+                </pfx:syncResponseBody>
+            </input>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="CatchAll">
+        <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
+        <pd:resourceType>ae.activities.catch</pd:resourceType>
+        <pd:x>71</pd:x>
+        <pd:y>383</pd:y>
+        <pd:handler>true</pd:handler>
+        <config>
+            <catchAll>true</catchAll>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="CatchBWE">
+        <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
+        <pd:resourceType>ae.activities.catch</pd:resourceType>
+        <pd:x>76</pd:x>
+        <pd:y>597</pd:y>
+        <pd:handler>true</pd:handler>
+        <config>
+            <fault>localname=bwException namespace=http://soa.coe.com/CommonTypes/Mediation/Framework/BWException</fault>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="Create Error Response">
+        <pd:type>com.tibco.plugin.mapper.MapperActivity</pd:type>
+        <pd:resourceType>ae.activities.MapperActivity</pd:resourceType>
+        <pd:x>198</pd:x>
+        <pd:y>391</pd:y>
+        <config>
+            <element ref="pfx4:Error"/>
+        </config>
+        <pd:inputBindings>
+            <pfx4:Error>
+                <xsl:value-of select="&quot;ERROR : Unexpected error in Main&quot;"/>
+            </pfx4:Error>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="DoAction">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>430</pd:x>
+        <pd:y>141</pd:y>
+        <config>
+            <processName>/CIO_LEAHPartnerCardGet_Sync/v1/Services/Operations/Get/Action/DoAction.process</processName>
+        </config>
+        <pd:inputBindings>
+            <xsl:copy-of select="$Parse-Request/pfx6:partnerCard_V1_Input"/>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Parse Request">
+        <pd:type>com.tibco.plugin.xml.XMLParseActivity</pd:type>
+        <pd:resourceType>ae.activities.XMLParseActivity</pd:resourceType>
+        <pd:x>321</pd:x>
+        <pd:y>140</pd:y>
+        <config>
+            <inputStyle>text</inputStyle>
+            <xsdVersion>default</xsdVersion>
+            <validateOutput>true</validateOutput>
+            <term ref="pfx6:partnerCard_V1_Input"/>
+        </config>
+        <pd:inputBindings>
+            <xmlString>
+                <xsl:value-of select="tib:render-xml($Start/pfx3:InputData/*)"/>
+            </xmlString>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="CORESTAT_BEGIN">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>211</pd:x>
+        <pd:y>142</pd:y>
+        <config>
+            <processName>/CORE_STAT/ProcessUtilities/Shared/Statistic/CORESTAT_BEGIN.process</processName>
+        </config>
+        <pd:inputBindings>
+            <pfx5:statEvent_input>
+                <pfx5:begin>
+                    <pfx5:params>
+                        <!--Please change the level as you want-->
+                        <pfx5:param>
+                            <pfx5:key>
+                                <xsl:value-of select="&quot;LEVEL&quot;"/>
+                            </pfx5:key>
+                            <pfx5:value>
+                                <xsl:value-of select="&quot;Get/Business&quot;"/>
+                            </pfx5:value>
+                        </pfx5:param>
+                        <!--The CORRID value will be overwritten internally by the Framework (normal behavior)-->
+                        <pfx5:param>
+                            <pfx5:key>
+                                <xsl:value-of select="&quot;CORRID&quot;"/>
+                            </pfx5:key>
+                            <pfx5:value>
+                                <xsl:value-of select="bwCustomFunctions:getUUIDNoDashes()"/>
+                            </pfx5:value>
+                        </pfx5:param>
+                    </pfx5:params>
+                    <pfx5:sourceName>
+                        <xsl:value-of select="&quot;BW&quot;"/>
+                    </pfx5:sourceName>
+                    <pfx5:applicationName>
+                        <xsl:value-of select="$_globalVariables/ns:GlobalVariables/CIO_LEAHPartnerCardGet_Sync/v1/ServiceCode"/>
+                    </pfx5:applicationName>
+                    <pfx5:subject>
+                        <xsl:value-of select="&quot;MAIN-CIO_LEAHPartnerCardGet_Sync_v1-Get&quot;"/>
+                    </pfx5:subject>
+                    <!--Change the analyse type in function of your needs-->
+                    <pfx5:analyseType>
+                        <xsl:value-of select="&quot;HTTP_SYNC&quot;"/>
+                    </pfx5:analyseType>
+                </pfx5:begin>
+            </pfx5:statEvent_input>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="CORESTAT_END">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>655</pd:x>
+        <pd:y>142</pd:y>
+        <config>
+            <processName>/CORE_STAT/ProcessUtilities/Shared/Statistic/CORESTAT_END.process</processName>
+        </config>
+        <pd:inputBindings>
+            <ns3:statEvent_input>
+                <ns3:end>
+                    <ns3:sourceName>
+                        <xsl:value-of select="&quot;BW&quot;"/>
+                    </ns3:sourceName>
+                    <ns3:correlationId>
+                        <xsl:value-of select="$CORESTAT_BEGIN/ns2:statEvent_output/ns2:result/ns2:correlationId"/>
+                    </ns3:correlationId>
+                </ns3:end>
+            </ns3:statEvent_input>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="CORESTAT_FAULT">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>492</pd:x>
+        <pd:y>383</pd:y>
+        <config>
+            <processName>/CORE_STAT/ProcessUtilities/Shared/Statistic/CORESTAT_FAULT.process</processName>
+        </config>
+        <pd:inputBindings>
+            <ns5:statEvent_input>
+                <ns5:fault>
+                    <ns5:sourceName>
+                        <xsl:value-of select="&quot;BW&quot;"/>
+                    </ns5:sourceName>
+                    <ns5:correlationId>
+                        <xsl:value-of select="$CORESTAT_BEGIN/ns2:statEvent_output/ns2:result/ns2:correlationId"/>
+                    </ns5:correlationId>
+                </ns5:fault>
+            </ns5:statEvent_input>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="CORESTAT_FAULT-1">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>227</pd:x>
+        <pd:y>600</pd:y>
+        <config>
+            <processName>/CORE_STAT/ProcessUtilities/Shared/Statistic/CORESTAT_FAULT.process</processName>
+        </config>
+        <pd:inputBindings>
+            <ns5:statEvent_input>
+                <ns5:fault>
+                    <ns5:sourceName>
+                        <xsl:value-of select="&quot;BW&quot;"/>
+                    </ns5:sourceName>
+                    <ns5:correlationId>
+                        <xsl:value-of select="$CORESTAT_BEGIN/ns2:statEvent_output/ns2:result/ns2:correlationId"/>
+                    </ns5:correlationId>
+                </ns5:fault>
+            </ns5:statEvent_input>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="LogOnError">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>620</pd:x>
+        <pd:y>385</pd:y>
+        <config>
+            <processName>/CORE_SERVICE/ProcessUtilities/LoggingPolicies/LogOnError.process</processName>
+        </config>
+        <pd:inputBindings>
+            <Input>
+                <xsl:copy-of select="$BE/output/pfx:bwException"/>
+            </Input>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="LogOnError-1">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>409</pd:x>
+        <pd:y>598</pd:y>
+        <config>
+            <processName>/CORE_SERVICE/ProcessUtilities/LoggingPolicies/LogOnError.process</processName>
+        </config>
+        <pd:inputBindings>
+            <Input>
+                <xsl:copy-of select="$CatchBWE/pfx:bwException"/>
+            </Input>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="GE-1">
+        <pd:type>com.tibco.pe.core.GenerateErrorActivity</pd:type>
+        <pd:resourceType>ae.activities.throw</pd:resourceType>
+        <pd:x>759</pd:x>
+        <pd:y>380</pd:y>
+        <config>
+            <faultName>Exception</faultName>
+        </config>
+        <pd:inputBindings>
+            <pfx2:ActivityInput>
+                <data>
+                    <xsl:copy-of select="$BE/output/pfx:bwException"/>
+                </data>
+            </pfx2:ActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Rethrow">
+        <pd:type>com.tibco.pe.core.RethrowActivity</pd:type>
+        <pd:resourceType>ae.activities.rethrow</pd:resourceType>
+        <pd:x>584</pd:x>
+        <pd:y>598</pd:y>
+        <config/>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="Map Reply">
+        <pd:type>com.tibco.plugin.mapper.MapperActivity</pd:type>
+        <pd:resourceType>ae.activities.MapperActivity</pd:resourceType>
+        <pd:x>531</pd:x>
+        <pd:y>141</pd:y>
+        <config>
+            <element>
+                <xsd:choice>
+                    <xsd:element ref="pfx6:ReplyPartnerCardGetV1_Output"/>
+                    <xsd:element ref="pfx6:ReplyPartnerCardGetErrorV1_Output"/>
+                </xsd:choice>
+            </element>
+        </config>
+        <pd:inputBindings>
+            <xsl:choose>
+                <xsl:when test="exists($DoAction/pfx6:ReplyPartnerCardGetErrorV1_Output)">
+                    <xsl:for-each select="$DoAction/pfx6:ReplyPartnerCardGetErrorV1_Output">
+                        <pfx6:ReplyPartnerCardGetErrorV1_Output>
+                            <xsl:if test="pfx6:code">
+                                <pfx6:code>
+                                    <xsl:value-of select="pfx6:code"/>
+                                </pfx6:code>
+                            </xsl:if>
+                            <xsl:if test="pfx6:field">
+                                <pfx6:field>
+                                    <xsl:value-of select="pfx6:field"/>
+                                </pfx6:field>
+                            </xsl:if>
+                            <xsl:if test="pfx6:message">
+                                <pfx6:message>
+                                    <xsl:value-of select="pfx6:message"/>
+                                </pfx6:message>
+                            </xsl:if>
+                            <xsl:if test="pfx6:details">
+                                <pfx6:details>
+                                    <xsl:value-of select="pfx6:details"/>
+                                </pfx6:details>
+                            </xsl:if>
+                        </pfx6:ReplyPartnerCardGetErrorV1_Output>
+                    </xsl:for-each>
+                </xsl:when>
+                <xsl:otherwise>
+                    <pfx6:ReplyPartnerCardGetV1_Output>
+                        <xsl:copy-of select="$DoAction/pfx6:ReplyPartnerCardGetV1_Output/pfx6:mapCard"/>
+                    </pfx6:ReplyPartnerCardGetV1_Output>
+                </xsl:otherwise>
+            </xsl:choose>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>CORESTAT_BEGIN</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>CatchBWE</pd:from>
+        <pd:to>CORESTAT_FAULT-1</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>CatchAll</pd:from>
+        <pd:to>Create Error Response</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>BE</pd:from>
+        <pd:to>CORESTAT_FAULT</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Create Error Response</pd:from>
+        <pd:to>BE</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Parse Request</pd:from>
+        <pd:to>DoAction</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>CORESTAT_BEGIN</pd:from>
+        <pd:to>Parse Request</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>CORESTAT_END</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>CORESTAT_FAULT</pd:from>
+        <pd:to>LogOnError</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>CORESTAT_FAULT-1</pd:from>
+        <pd:to>LogOnError-1</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>LogOnError-1</pd:from>
+        <pd:to>Rethrow</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>LogOnError</pd:from>
+        <pd:to>GE-1</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>DoAction</pd:from>
+        <pd:to>Map Reply</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Map Reply</pd:from>
+        <pd:to>CORESTAT_END</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:label>
+        <pd:name>Label</pd:name>
+        <pd:description>Implement here your business logic using the different actions that you will found in Action process folder.</pd:description>
+        <pd:x>244</pd:x>
+        <pd:y>295</pd:y>
+        <pd:width>309</pd:width>
+        <pd:height>77</pd:height>
+        <pd:fontColor>-16777216</pd:fontColor>
+        <pd:color>-26368</pd:color>
+        <pd:type>solid</pd:type>
+        <pd:thickness>0</pd:thickness>
+        <pd:fade>true</pd:fade>
+    </pd:label>
+    <pd:label>
+        <pd:name>Label (1)</pd:name>
+        <pd:description>In the main operation process, you have to catch properly the error to trace the message technical/functional to BWPM and to return an acceptable response to client app (only for synchronous operations)..</pd:description>
+        <pd:x>370</pd:x>
+        <pd:y>521</pd:y>
+        <pd:width>628</pd:width>
+        <pd:height>57</pd:height>
+        <pd:fontColor>-16777216</pd:fontColor>
+        <pd:color>-52480</pd:color>
+        <pd:type>solid</pd:type>
+        <pd:thickness>0</pd:thickness>
+        <pd:fade>true</pd:fade>
+    </pd:label>
+    <pd:label>
+        <pd:name>Label (1) (1) (1)</pd:name>
+        <pd:description>TODO: Please update all the fields into the core-stat components to be conformed with your needs</pd:description>
+        <pd:x>200</pd:x>
+        <pd:y>48</pd:y>
+        <pd:width>206</pd:width>
+        <pd:height>78</pd:height>
+        <pd:fontName>Dialog.bold-plain-12</pd:fontName>
+        <pd:fontColor>-16777216</pd:fontColor>
+        <pd:color>-52480</pd:color>
+        <pd:type>solid</pd:type>
+        <pd:thickness>0</pd:thickness>
+        <pd:fade>true</pd:fade>
+    </pd:label>
+    <pd:label>
+        <pd:name>Label (2)</pd:name>
+        <pd:description>Based on your requirements, you can propagate or not the exception. Usually for synchronous operations, you should not propagate the exception to the caller process but return properly an error message. </pd:description>
+        <pd:x>608</pd:x>
+        <pd:y>245</pd:y>
+        <pd:width>308</pd:width>
+        <pd:height>80</pd:height>
+        <pd:fontColor>-16777216</pd:fontColor>
+        <pd:color>-26368</pd:color>
+        <pd:type>solid</pd:type>
+        <pd:thickness>0</pd:thickness>
+        <pd:fade>true</pd:fade>
+    </pd:label>
+</pd:ProcessDefinition>

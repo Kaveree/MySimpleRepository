@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://accorhotels.com/internal/schema/local/CIO_LEAHPartnerCardGet_Sync/v1"
+	 targetNamespace="http://accorhotels.com/internal/schema/local/CIO_LEAHPartnerCardGet_Sync/v1"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="Request" type="xs:string"/>
+	<xs:element name="Reply" type="xs:string"/>
+	<xs:element name="Error" type="xs:string"/>
+</xs:schema>

@@ -1,0 +1,29 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<repository xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xmlns = "http://www.tibco.com/xmlns/repo/types/2002">
+	<globalVariables>
+		<globalVariable>
+			<name>DestinationQueue</name>
+			<value>input.CIO_LEAHPartnerCardGet_Sync_v1.Get</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1519728495559</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>MaxSession</name>
+			<value>8</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>Integer</type>
+			<modTime>1519728494229</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>ReceiverTimeout</name>
+			<value>5</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>Integer</type>
+			<modTime>1519728496415</modTime>
+		</globalVariable>
+	</globalVariables>
+</repository>

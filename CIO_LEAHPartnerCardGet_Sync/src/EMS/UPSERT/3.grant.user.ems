@@ -1,0 +1,2 @@
+grant queue input.CIO_LEAHPartnerCardGet_Sync_v1.Get user=esb receive,send,browse
+commit

@@ -1,0 +1,64 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.accorhotels.esb.customer.default.dtl</groupId>
+    <artifactId>CIO_LEAHPartnerCardGet_Sync-interface</artifactId>
+    <packaging>bwdtl</packaging>
+    <name>CIO_LEAHPartnerCardGet_Sync interface DTL</name>
+
+    <properties>
+        <relativeParentBasedir>../../../..</relativeParentBasedir>
+    </properties>
+
+    <parent>
+        <groupId>com.accorhotels.esb.customer.default.projects</groupId>
+        <artifactId>CIO_LEAHPartnerCardGet_Sync</artifactId>
+        <relativePath>../../../../pom.xml</relativePath>
+        <version>1.0.3-SNAPSHOT</version>
+    </parent>
+
+    <build>
+        <directory>${relativeParentBasedir}/target</directory>
+        <outputDirectory>${relativeParentBasedir}/target/DTL</outputDirectory>
+        <plugins>
+            <plugin>
+                <groupId>com.tibco.maven.plugins</groupId>
+                <artifactId>bwfactory-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <scriptFolders>
+                        <scriptFolder>${project.parent.basedir}/src/SQL</scriptFolder>
+                        <scriptFolder>${project.parent.basedir}/src/EMS</scriptFolder>
+                    </scriptFolders>
+                    <libraryURI>/_DTL/interface/CIO_LEAHPartnerCardGet_Sync-interface.libbuilder</libraryURI>       
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.8</version>
+                <configuration>
+                    <artifacts>
+                        <artifact>
+                            <file>${project.build.directory}/scripts/${project.artifactId}-${project.version}-scripts.jar</file>
+                            <type>jar</type>
+                            <classifier>scripts</classifier>
+                        </artifact>
+                        <artifact>
+                            <file>${project.build.outputDirectory}/${project.artifactId}.projlib</file>
+                            <type>projlib</type>
+                        </artifact>
+                    </artifacts>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>2.4.1</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -1,0 +1,2 @@
+create queue input.CIO_LEAHPartnerCardGet_Sync_v1.Get secure,store=$sys.failsafe,prefetch=10
+commit

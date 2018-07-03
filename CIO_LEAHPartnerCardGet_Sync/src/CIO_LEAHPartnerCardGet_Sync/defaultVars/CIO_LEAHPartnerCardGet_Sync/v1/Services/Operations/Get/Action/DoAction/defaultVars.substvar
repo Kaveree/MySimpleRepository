@@ -1,0 +1,45 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<repository xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xmlns = "http://www.tibco.com/xmlns/repo/types/2002">
+	<globalVariables>
+		<globalVariable>
+			<name>DelayBetweenRetryWS</name>
+			<value>5000</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>Integer</type>
+			<modTime>1519728495260</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>LogRetryTrace</name>
+			<value>true</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>Boolean</type>
+			<modTime>1519728495845</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>MaxRetry</name>
+			<value>-1</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>Integer</type>
+			<modTime>1519728496115</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>RestURI</name>
+			<value>/loyalty-services/rest/1.0/CardWS/getPartnerCard</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1519728494590</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>Timeout</name>
+			<value>3000</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>Integer</type>
+			<modTime>1519728494939</modTime>
+		</globalVariable>
+	</globalVariables>
+</repository>

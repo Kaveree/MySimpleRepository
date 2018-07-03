@@ -1,0 +1,1004 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns14="http://www.tibco.com/namespaces/tnt/plugins/json" xmlns:ns="http://soa.coe.com/services/BackendRequest" xmlns:ns12="www.tibco.com/plugin/Sleep" xmlns:ns5="http://soa.coe.com/CommonTypes/Mediation/BWProcessContext" xmlns:ns13="http://www.faizsiegeln.com/njams" xmlns:pfx="http://www.tibco.com/pe/DeployedVarsType" xmlns:ns2="http://soa.coe.com/infra/mediation/CommonServices/StatEvent" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns1="http://www.tibco.com/pe/EngineTypes" xmlns:ns4="http://soa.coe.com/infra/mediation/CommonServices/StatEventBegin" xmlns:bwCustomFunctions="java://com.tibco.tibcobw.customfunctions.bwCustomFunctions" xmlns:ns3="http://soa.coe.com/CommonTypes/Mediation/Framework/BWException" xmlns:pfx5="http://soa.coe.com/infra/mediation/CommonServices/StatEventEnd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:pfx4="http://www.tibco.com/pe/GenerateErrorActivity/InputSchema" xmlns:pfx3="http://accorhotels.com/internal/schema/local/CIO_LEAHPartnerCardGet_Sync/v1" xmlns:pfx2="http://soa.coe.com/CommonTypes/Mediation/Framework" xmlns:pfx8="http://www.tibco.com/schemas/CIO_LEAHPartnerCardGet_Sync/CIO_LEAHPartnerCardGet_Sync/v1/Resources/Schemas/XSD/CIO_LEAHPartnerCardGet_Sync.xsd" xmlns:pfx7="http://accorhotels.com/internal/schema/local/CIO_LEAHBurn4StaySimulate_Sync/v1/Resources/Schemas/XSD/CIO_LEAHBurn4StaySimulate_Sync.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pfx6="http://soa.coe.com/infra/mediation/CommonServices/StatEventFault">
+    <xsd:import namespace="http://soa.coe.com/CommonTypes/Mediation/Framework/BWException" schemaLocation="/CORE_COMMON/Resources/Schemas/ErrorHandling/bwexception.xsd"/>
+    <xsd:import namespace="http://soa.coe.com/CommonTypes/Mediation/Framework" schemaLocation="/CORE_COMMON/Resources/Schemas/CommonTypes/CommonFrameworkTypes.xsd"/>
+    <xsd:import namespace="http://accorhotels.com/internal/schema/local/CIO_LEAHPartnerCardGet_Sync/v1" schemaLocation="/CIO_LEAHPartnerCardGet_Sync/v1/Resources/Schemas/XSD/Get_CIO_LEAHPartnerCardGet_Sync_v1.xsd"/>
+    <xsd:import namespace="http://accorhotels.com/internal/schema/local/CIO_LEAHBurn4StaySimulate_Sync/v1/Resources/Schemas/XSD/CIO_LEAHBurn4StaySimulate_Sync.xsd" schemaLocation="/CIO_LEAHBurn4StaySimulate_Sync/v1/Resources/Schemas/XSD/CIO_LEAHBurn4StaySimulate_Sync.xsd"/>
+    <xsd:import namespace="http://soa.coe.com/CommonTypes/Mediation/Framework/BWException" schemaLocation="/CORE_COMMON/Resources/Schemas/ErrorHandling/BWException.xsd"/>
+    <xsd:import namespace="http://www.tibco.com/schemas/CIO_LEAHPartnerCardGet_Sync/CIO_LEAHPartnerCardGet_Sync/v1/Resources/Schemas/XSD/CIO_LEAHPartnerCardGet_Sync.xsd" schemaLocation="/CIO_LEAHPartnerCardGet_Sync/v1/Resources/Schemas/XSD/CIO_LEAHPartnerCardGet_Sync.xsd"/>
+    <pd:name>CIO_LEAHPartnerCardGet_Sync/v1/Services/Operations/Get/Action/DoAction.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType ref="pfx8:partnerCard_V1_Input"/>
+    <pd:startX>27</pd:startX>
+    <pd:startY>141</pd:startY>
+    <pd:returnBindings>
+        <xsl:choose>
+            <!--Erro case-->
+            <xsl:when test="$Invoke-REST-API/ns14:RESTOutput/StatusCode!=&quot;200&quot;">
+                <pfx8:ReplyPartnerCardGetErrorV1_Output>
+                    <pfx8:code>
+                        <xsl:value-of select="$Invoke-REST-API/ns14:RESTOutput/StatusCode"/>
+                    </pfx8:code>
+                    <pfx8:message>
+                        <xsl:value-of select="$Invoke-REST-API/ns14:RESTOutput/msg"/>
+                    </pfx8:message>
+                    <pfx8:details>
+                        <xsl:value-of select="&quot;Error during the invocation of the REST API LEAH&quot;"/>
+                    </pfx8:details>
+                </pfx8:ReplyPartnerCardGetErrorV1_Output>
+            </xsl:when>
+            <!--Bases on functional spec: get the message if the value is not equal to null-->
+            <xsl:when test="exists($Parse-JSON)">
+                <xsl:for-each select="$Parse-JSON/ns14:ActivityOutputClass/pfx8:ReplyPartnerCardGetV1_Output">
+                    <pfx8:ReplyPartnerCardGetV1_Output>
+                        <xsl:for-each select="pfx8:mapCard">
+                            <pfx8:mapCard>
+                                <xsl:if test="pfx8:appDeliveryType">
+                                    <pfx8:appDeliveryType>
+                                        <xsl:value-of select="pfx8:appDeliveryType"/>
+                                    </pfx8:appDeliveryType>
+                                </xsl:if>
+                                <xsl:if test="pfx8:enrollmentCode">
+                                    <pfx8:enrollmentCode>
+                                        <xsl:value-of select="pfx8:enrollmentCode"/>
+                                    </pfx8:enrollmentCode>
+                                </xsl:if>
+                                <pfx8:levelCode>
+                                    <xsl:value-of select="pfx8:levelCode"/>
+                                </pfx8:levelCode>
+                                <pfx8:loyaltyMembershipType>
+                                    <xsl:value-of select="pfx8:loyaltyMembershipType"/>
+                                </pfx8:loyaltyMembershipType>
+                                <pfx8:memExpirationDate>
+                                    <xsl:value-of select="pfx8:memExpirationDate"/>
+                                </pfx8:memExpirationDate>
+                                <pfx8:memberNumber>
+                                    <xsl:value-of select="pfx8:memberNumber"/>
+                                </pfx8:memberNumber>
+                                <xsl:if test="pfx8:orsId">
+                                    <pfx8:orsId>
+                                        <xsl:value-of select="pfx8:orsId"/>
+                                    </pfx8:orsId>
+                                </xsl:if>
+                                <xsl:if test="pfx8:submissionDate">
+                                    <pfx8:submissionDate>
+                                        <xsl:value-of select="pfx8:submissionDate"/>
+                                    </pfx8:submissionDate>
+                                </xsl:if>
+                            </pfx8:mapCard>
+                        </xsl:for-each>
+                    </pfx8:ReplyPartnerCardGetV1_Output>
+                </xsl:for-each>
+            </xsl:when>
+            <!--Response from the backend is equal to null-->
+            <xsl:when test="exists($ResponseEmpty)">
+                <pfx8:ReplyPartnerCardGetV1_Output>
+                    <xsl:copy-of select="$ResponseEmpty/pfx8:ReplyPartnerCardGetV1_Output/pfx8:mapCard"/>
+                </pfx8:ReplyPartnerCardGetV1_Output>
+            </xsl:when>
+            <xsl:otherwise>
+                <pfx8:ReplyPartnerCardGetErrorV1_Output>
+                    <pfx8:code>
+                        <xsl:value-of select="500"/>
+                    </pfx8:code>
+                    <pfx8:message>
+                        <xsl:value-of select="&quot;Technical error from LEAH&quot;"/>
+                    </pfx8:message>
+                    <pfx8:details>
+                        <xsl:value-of select="$Invoke-REST-API/ns14:RESTOutput/msg"/>
+                    </pfx8:details>
+                </pfx8:ReplyPartnerCardGetErrorV1_Output>
+            </xsl:otherwise>
+        </xsl:choose>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType>
+        <xsd:choice>
+            <xsd:element ref="pfx8:ReplyPartnerCardGetV1_Output"/>
+            <xsd:element ref="pfx8:ReplyPartnerCardGetErrorV1_Output"/>
+        </xsd:choice>
+    </pd:endType>
+    <pd:endX>1371</pd:endX>
+    <pd:endY>261</pd:endY>
+    <pd:errorSchemas>
+        <Exception ref="ns3:bwException"/>
+    </pd:errorSchemas>
+    <pd:processVariables>
+        <SystemStatus>
+            <xsd:element name="SystemStatus">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="Unavailable" type="xsd:boolean"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </SystemStatus>
+    </pd:processVariables>
+    <pd:targetNamespace>http://accorhotels.com/CIO_LEAHPartnerCardGet_Sync/v1/Services/Operations/Get/Action/DoAction</pd:targetNamespace>
+    <pd:activity name="Create Error Response">
+        <pd:type>com.tibco.plugin.mapper.MapperActivity</pd:type>
+        <pd:resourceType>ae.activities.MapperActivity</pd:resourceType>
+        <pd:x>155</pd:x>
+        <pd:y>538</pd:y>
+        <config>
+            <element ref="pfx3:Error"/>
+        </config>
+        <pd:inputBindings>
+            <pfx3:Error>
+                <xsl:value-of select="concat(&quot;Error in CIO_LEAHPartnerCardGet_Sync_v1: &quot;,$_error_GExxxx/ns3:bwException/ns3:eventException/ns3:desc)"/>
+            </pfx3:Error>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="CORESTAT_BEGIN">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>302</pd:x>
+        <pd:y>266</pd:y>
+        <config>
+            <processName>/CORE_STAT/ProcessUtilities/Shared/Statistic/CORESTAT_BEGIN.process</processName>
+        </config>
+        <pd:inputBindings>
+            <ns4:statEvent_input>
+                <ns4:begin>
+                    <ns4:params>
+                        <!--Please change the level as you want-->
+                        <ns4:param>
+                            <ns4:key>
+                                <xsl:value-of select="&quot;LEVEL&quot;"/>
+                            </ns4:key>
+                            <ns4:value>
+                                <xsl:value-of select="&quot;Get/Action&quot;"/>
+                            </ns4:value>
+                        </ns4:param>
+                        <ns4:param>
+                            <!--The CORRID value will be overwritten internally by the Framework (normal behavior)-->
+                            <ns4:key>
+                                <xsl:value-of select="&quot;CORRID&quot;"/>
+                            </ns4:key>
+                            <ns4:value>
+                                <xsl:value-of select="bwCustomFunctions:getUUIDNoDashes()"/>
+                            </ns4:value>
+                        </ns4:param>
+                    </ns4:params>
+                    <ns4:sourceName>
+                        <xsl:value-of select="&quot;BW&quot;"/>
+                    </ns4:sourceName>
+                    <ns4:applicationName>
+                        <xsl:value-of select="$_globalVariables/pfx:GlobalVariables/CIO_LEAHPartnerCardGet_Sync/v1/ServiceCode"/>
+                    </ns4:applicationName>
+                    <ns4:subject>
+                        <xsl:value-of select="&quot;ACTION-CIO_LEAHPartnerCardGet_Sync_v1-Get&quot;"/>
+                    </ns4:subject>
+                    <!--Change the analyse type in function of your needs-->
+                    <ns4:analyseType>
+                        <xsl:value-of select="&quot;HTTP_SYNC&quot;"/>
+                    </ns4:analyseType>
+                </ns4:begin>
+            </ns4:statEvent_input>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="CORESTAT_END">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>1141</pd:x>
+        <pd:y>258</pd:y>
+        <config>
+            <processName>/CORE_STAT/ProcessUtilities/Shared/Statistic/CORESTAT_END.process</processName>
+        </config>
+        <pd:inputBindings>
+            <pfx5:statEvent_input>
+                <pfx5:end>
+                    <pfx5:sourceName>
+                        <xsl:value-of select="&quot;BW&quot;"/>
+                    </pfx5:sourceName>
+                    <pfx5:correlationId>
+                        <xsl:value-of select="$CORESTAT_BEGIN/ns2:statEvent_output/ns2:result/ns2:correlationId"/>
+                    </pfx5:correlationId>
+                </pfx5:end>
+            </pfx5:statEvent_input>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="CORESTAT_FAULT">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>300</pd:x>
+        <pd:y>528</pd:y>
+        <config>
+            <processName>/CORE_STAT/ProcessUtilities/Shared/Statistic/CORESTAT_FAULT.process</processName>
+        </config>
+        <pd:inputBindings>
+            <pfx6:statEvent_input>
+                <pfx6:fault>
+                    <pfx6:sourceName>
+                        <xsl:value-of select="&quot;BW&quot;"/>
+                    </pfx6:sourceName>
+                    <pfx6:correlationId>
+                        <xsl:value-of select="$CORESTAT_BEGIN/ns2:statEvent_output/ns2:result/ns2:correlationId"/>
+                    </pfx6:correlationId>
+                </pfx6:fault>
+            </pfx6:statEvent_input>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Init Status">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>175</pd:x>
+        <pd:y>267</pd:y>
+        <config>
+            <variableName>SystemStatus</variableName>
+        </config>
+        <pd:inputBindings>
+            <SystemStatus>
+                <Unavailable>
+                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;false&quot;"/>
+                </Unavailable>
+            </SystemStatus>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Get Rest Password GV">
+        <pd:type>com.tibco.plugin.java.JavaActivity</pd:type>
+        <pd:resourceType>ae.javapalette.javaActivity</pd:resourceType>
+        <pd:x>176</pd:x>
+        <pd:y>397</pd:y>
+        <config>
+            <fileName>DoActionGetRestPasswordGV</fileName>
+            <packageName>CIO_LEAHPartnerCardGet_Sync.v1.Services.Operations.Get.Action.DoAction</packageName>
+            <fullsource>package CIO_LEAHPartnerCardGet_Sync.v1.Services.Operations.Get.Action.DoAction;
+import java.util.*;
+import java.io.*;
+public class DoActionGetRestPasswordGV{
+/****** START SET/GET METHOD, DO NOT MODIFY *****/
+	protected String GvarPwd = "";
+	public String getGvarPwd() {
+		return GvarPwd;
+	}
+	public void setGvarPwd(String val) {
+		GvarPwd = val;
+	}
+/****** END SET/GET METHOD, DO NOT MODIFY *****/
+	public DoActionGetRestPasswordGV() {
+	}
+	public void invoke() throws Exception {
+/* Available Variables: DO NOT MODIFY
+	Out : String GvarPwd
+* Available Variables: DO NOT MODIFY *****/
+
+String pwd="";
+
+pwd="tibco.clientVar.CIO_LEAHBurn4StaySimulate_Sync/Shared/RestPassword";
+GvarPwd=  com.tibco.pe.plugin.PluginProperties.getProperty(pwd);}
+}
+</fullsource>
+            <outputData>
+                <row>
+                    <fieldName>GvarPwd</fieldName>
+                    <fieldType>string</fieldType>
+                    <fieldRequired>optional</fieldRequired>
+                </row>
+            </outputData>
+            <byteCode>
+                <class>
+                    <name>DoActionGetRestPasswordGV</name>
+                    <byteCode>yv66vgAAADMAIwkABgAXCgAHABgIABkIABoKABsAHAcAHQcAHgEAB0d2YXJQd2QBABJMamF2YS9sYW5nL1N0cmluZzsBAApnZXRHdmFyUHdkAQAUKClMamF2YS9sYW5nL1N0cmluZzsBAARDb2RlAQAPTGluZU51bWJlclRhYmxlAQAKc2V0R3ZhclB3ZAEAFShMamF2YS9sYW5nL1N0cmluZzspVgEABjxpbml0PgEAAygpVgEABmludm9rZQEACkV4Y2VwdGlvbnMHAB8BAApTb3VyY2VGaWxlAQAeRG9BY3Rpb25HZXRSZXN0UGFzc3dvcmRHVi5qYXZhDAAIAAkMABAAEQEAAAEAQnRpYmNvLmNsaWVudFZhci5DSU9fTEVBSEJ1cm40U3RheVNpbXVsYXRlX1N5bmMvU2hhcmVkL1Jlc3RQYXNzd29yZAcAIAwAIQAiAQBgQ0lPX0xFQUhQYXJ0bmVyQ2FyZEdldF9TeW5jL3YxL1NlcnZpY2VzL09wZXJhdGlvbnMvR2V0L0FjdGlvbi9Eb0FjdGlvbi9Eb0FjdGlvbkdldFJlc3RQYXNzd29yZEdWAQAQamF2YS9sYW5nL09iamVjdAEAE2phdmEvbGFuZy9FeGNlcHRpb24BACRjb20vdGliY28vcGUvcGx1Z2luL1BsdWdpblByb3BlcnRpZXMBAAtnZXRQcm9wZXJ0eQEAJihMamF2YS9sYW5nL1N0cmluZzspTGphdmEvbGFuZy9TdHJpbmc7ACEABgAHAAAAAQAEAAgACQAAAAQAAQAKAAsAAQAMAAAAHQABAAEAAAAFKrQAAbAAAAABAA0AAAAGAAEAAAAIAAEADgAPAAEADAAAACIAAgACAAAABiortQABsQAAAAEADQAAAAoAAgAAAAsABQAMAAEAEAARAAEADAAAACsAAgABAAAACyq3AAIqEgO1AAGxAAAAAQANAAAADgADAAAADgAEAAYACgAPAAEAEgARAAIADAAAAC8AAgACAAAADxIDTBIETCoruAAFtQABsQAAAAEADQAAAA4AAwAAABUAAwAXAAYAGAATAAAABAABABQAAQAVAAAAAgAW</byteCode>
+                </class>
+            </byteCode>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="LogConsultingRequest">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>303</pd:x>
+        <pd:y>390</pd:y>
+        <config>
+            <processName>/CORE_SERVICE/ProcessUtilities/LoggingPolicies/LogConsulting.process</processName>
+        </config>
+        <pd:inputBindings>
+            <in>
+                <logCode>
+                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;WS-RETRY-AUTO-REQUEST&quot;"/>
+                </logCode>
+                <payload>
+                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="tib:render-xml($Start/*, true(), false())"/>
+                </payload>
+            </in>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="GetContext">
+        <pd:type>com.tibco.pe.core.GetSharedVariableActivity</pd:type>
+        <pd:resourceType>ae.activities.getSharedVariable</pd:resourceType>
+        <pd:x>427</pd:x>
+        <pd:y>267</pd:y>
+        <config>
+            <variableConfig>/CORE_SERVICE/Resources/Variables/Job/ProcessContext.jobsharedvariable</variableConfig>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:group name="Group">
+        <pd:type>com.tibco.pe.core.LoopGroup</pd:type>
+        <pd:resourceType>ae.process.group</pd:resourceType>
+        <pd:x>535</pd:x>
+        <pd:y>46</pd:y>
+        <pd:width>513</pd:width>
+        <pd:height>425</pd:height>
+        <pd:collapsedWidth>57</pd:collapsedWidth>
+        <pd:collapsedHeight>70</pd:collapsedHeight>
+        <pd:groupVariables/>
+        <pd:joinToggle>inherit</pd:joinToggle>
+        <config>
+            <pd:groupType>errorLoop</pd:groupType>
+            <pd:serializable>false</pd:serializable>
+            <pd:indexSlot>index</pd:indexSlot>
+            <pd:errorCondition>$SystemStatus/SystemStatus/Unavailable = "false" or $index &gt; $_globalVariables/pfx:GlobalVariables/CIO_LEAHPartnerCardGet_Sync/v1/Services/Operations/Get/Action/DoAction/MaxRetry</pd:errorCondition>
+            <pd:suspendAfterErrorRetry>false</pd:suspendAfterErrorRetry>
+        </config>
+        <pd:inputBindings/>
+        <pd:expanded>true</pd:expanded>
+        <pd:transition>
+            <pd:from>start</pd:from>
+            <pd:to>LogInfo</pd:to>
+            <pd:xpathDescription>Trace Retry</pd:xpathDescription>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16737793</pd:lineColor>
+            <pd:conditionType>xpath</pd:conditionType>
+            <pd:xpath>$_globalVariables/pfx:GlobalVariables/CIO_LEAHPartnerCardGet_Sync/v1/Services/Operations/Get/Action/DoAction/LogRetryTrace = "true"</pd:xpath>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>start</pd:from>
+            <pd:to>Null</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-26317</pd:lineColor>
+            <pd:conditionType>otherwise</pd:conditionType>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>LogConsultingReply</pd:from>
+            <pd:to>end</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>LogInfo</pd:from>
+            <pd:to>Null</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>Null</pd:from>
+            <pd:to>Invoke REST API</pd:to>
+            <pd:xpathDescription>First</pd:xpathDescription>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16737793</pd:lineColor>
+            <pd:conditionType>xpath</pd:conditionType>
+            <pd:xpath>$index =1</pd:xpath>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>Sleep</pd:from>
+            <pd:to>Invoke REST API</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>Null</pd:from>
+            <pd:to>Sleep</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-26317</pd:lineColor>
+            <pd:conditionType>otherwise</pd:conditionType>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>Invoke REST API</pd:from>
+            <pd:to>LogConsultingReply</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>Catch</pd:from>
+            <pd:to>CheckSysSoapHttp</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>CheckSysSoapHttp</pd:from>
+            <pd:to>Set Status</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>Set Status</pd:from>
+            <pd:to>BExxxx</pd:to>
+            <pd:xpathDescription>System KO</pd:xpathDescription>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16737793</pd:lineColor>
+            <pd:conditionType>xpath</pd:conditionType>
+            <pd:xpath>$SystemStatus/SystemStatus/Unavailable ="true"</pd:xpath>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>BExxxx</pd:from>
+            <pd:to>GExxxx</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>Set Status</pd:from>
+            <pd:to>Rethrow</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-26317</pd:lineColor>
+            <pd:conditionType>otherwise</pd:conditionType>
+        </pd:transition>
+        <pd:activity name="Null">
+            <pd:type>com.tibco.plugin.timer.NullActivity</pd:type>
+            <pd:resourceType>ae.activities.null</pd:resourceType>
+            <pd:x>732</pd:x>
+            <pd:y>239</pd:y>
+            <config/>
+            <pd:inputBindings/>
+        </pd:activity>
+        <pd:activity name="LogInfo">
+            <pd:type>com.faizsiegeln.njams.client.palette.Info</pd:type>
+            <pd:resourceType>njams.activity.info</pd:resourceType>
+            <pd:x>645</pd:x>
+            <pd:y>110</pd:y>
+            <config/>
+            <pd:inputBindings>
+                <ns13:nJAMSLogInfo>
+                    <ns13:EventMsgCode>
+                        <xsl:value-of select="&quot;INFO&quot;"/>
+                    </ns13:EventMsgCode>
+                    <ns13:EventMsg>
+                        <xsl:value-of select="concat(&quot;Invoking the WS after &quot;,$index - 1,&quot; retries &quot;)"/>
+                    </ns13:EventMsg>
+                </ns13:nJAMSLogInfo>
+            </pd:inputBindings>
+        </pd:activity>
+        <pd:activity name="Sleep">
+            <pd:type>com.tibco.plugin.timer.SleepActivity</pd:type>
+            <pd:resourceType>ae.activities.sleep</pd:resourceType>
+            <pd:x>850</pd:x>
+            <pd:y>240</pd:y>
+            <config/>
+            <pd:inputBindings>
+                <ns12:SleepInputSchema>
+                    <IntervalInMillisec>
+                        <xsl:value-of select="$_globalVariables/pfx:GlobalVariables/CIO_LEAHPartnerCardGet_Sync/v1/Services/Operations/Get/Action/DoAction/DelayBetweenRetryWS"/>
+                    </IntervalInMillisec>
+                </ns12:SleepInputSchema>
+            </pd:inputBindings>
+        </pd:activity>
+        <pd:activity name="Invoke REST API">
+            <pd:type>com.tibco.plugin.json.activities.RestActivity</pd:type>
+            <pd:resourceType>ae.activities.RestActivity</pd:resourceType>
+            <pd:x>850</pd:x>
+            <pd:y>109</pd:y>
+            <config>
+                <enableProtocolUI>None</enableProtocolUI>
+                <restMethodUI>GET</restMethodUI>
+                <restResponseType>JSON</restResponseType>
+                <authChoiceUI>Basic Authentication</authChoiceUI>
+                <WADLPaths/>
+                <WADLBaseURL/>
+                <restMethodIDUI/>
+                <restURI>%%CIO_LEAHPartnerCardGet_Sync/Shared/Hostname%%%%CIO_LEAHPartnerCardGet_Sync/v1/Services/Operations/Get/Action/DoAction/RestURI%%</restURI>
+                <trustAllHostUI>%%CIO_LEAHPartnerCardGet_Sync/Shared/TrustHTTPSHost%%</trustAllHostUI>
+                <richOutputEnableUI>false</richOutputEnableUI>
+                <restInputReferNode>
+                    <xsd:element name="Parameters">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="Query" minOccurs="0">
+                                    <xsd:complexType>
+                                        <xsd:sequence>
+                                            <xsd:element name="pmid" type="xsd:string" minOccurs="0"/>
+                                        </xsd:sequence>
+                                    </xsd:complexType>
+                                </xsd:element>
+                                <xsd:element name="Header" minOccurs="0">
+                                    <xsd:complexType>
+                                        <xsd:sequence>
+                                            <xsd:element name="x-traceid" type="xsd:string" minOccurs="0"/>
+                                        </xsd:sequence>
+                                    </xsd:complexType>
+                                </xsd:element>
+                                <xsd:element name="Body" minOccurs="0">
+                                    <xsd:complexType>
+                                        <xsd:sequence>
+                                            <xsd:element name="Form" minOccurs="0">
+                                                <xsd:complexType>
+                                                    <xsd:sequence>
+                                                        <xsd:element name="param" type="xsd:string" minOccurs="0"/>
+                                                    </xsd:sequence>
+                                                </xsd:complexType>
+                                            </xsd:element>
+                                            <xsd:element name="Text" minOccurs="0">
+                                                <xsd:complexType>
+                                                    <xsd:sequence>
+                                                        <xsd:element name="type" type="xsd:string" minOccurs="0"/>
+                                                        <xsd:element name="content" type="xsd:string" minOccurs="0"/>
+                                                    </xsd:sequence>
+                                                </xsd:complexType>
+                                            </xsd:element>
+                                            <xsd:element name="Binary" minOccurs="0">
+                                                <xsd:complexType>
+                                                    <xsd:sequence>
+                                                        <xsd:element name="type" type="xsd:string" minOccurs="0"/>
+                                                        <xsd:element name="content" type="xsd:base64Binary" minOccurs="0"/>
+                                                    </xsd:sequence>
+                                                </xsd:complexType>
+                                            </xsd:element>
+                                            <xsd:element name="Multipart" minOccurs="0" maxOccurs="unbounded">
+                                                <xsd:complexType>
+                                                    <xsd:sequence>
+                                                        <xsd:element name="content-disposition" type="xsd:string" minOccurs="0"/>
+                                                        <xsd:element name="name" type="xsd:string" minOccurs="0"/>
+                                                        <xsd:element name="filename" type="xsd:string" minOccurs="0"/>
+                                                        <xsd:element name="content-type" type="xsd:string" minOccurs="0"/>
+                                                        <xsd:element name="content-id" type="xsd:string" minOccurs="0"/>
+                                                        <xsd:element name="content" minOccurs="0">
+                                                            <xsd:complexType>
+                                                                <xsd:choice>
+                                                                    <xsd:element name="binary" type="xsd:base64Binary"/>
+                                                                    <xsd:element name="text" type="xsd:string"/>
+                                                                    <xsd:element name="fileName" type="xsd:string"/>
+                                                                </xsd:choice>
+                                                            </xsd:complexType>
+                                                        </xsd:element>
+                                                    </xsd:sequence>
+                                                </xsd:complexType>
+                                            </xsd:element>
+                                        </xsd:sequence>
+                                    </xsd:complexType>
+                                </xsd:element>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                </restInputReferNode>
+                <restOutputReferNode>
+                    <xsd:element name="header">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="Server" type="xsd:string" minOccurs="0"/>
+                                <xsd:element name="Location" type="xsd:string" minOccurs="0"/>
+                                <xsd:element name="Allow" type="xsd:string" minOccurs="0"/>
+                                <xsd:element name="Date" type="xsd:string" minOccurs="0"/>
+                                <xsd:element name="Set-Cookie" type="xsd:string" minOccurs="0"/>
+                                <xsd:element name="Pragma" type="xsd:string" minOccurs="0"/>
+                                <xsd:element name="Content-Type" type="xsd:string" minOccurs="0"/>
+                                <xsd:element name="Content-Length" type="xsd:string" minOccurs="0"/>
+                                <xsd:element name="Content-Encoding" type="xsd:string" minOccurs="0"/>
+                                <xsd:element name="Content-Range" type="xsd:string" minOccurs="0"/>
+                                <xsd:element name="Last-Modifie" type="xsd:string" minOccurs="0"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                </restOutputReferNode>
+            </config>
+            <pd:inputBindings>
+                <ns14:ActivityInput>
+                    <Timeout>
+                        <xsl:value-of select="$_globalVariables/pfx:GlobalVariables/CIO_LEAHPartnerCardGet_Sync/v1/Services/Operations/Get/Action/DoAction/Timeout"/>
+                    </Timeout>
+                    <ns14:Parameters>
+                        <Query>
+                            <pmid>
+                                <xsl:value-of select="$Start/pfx8:partnerCard_V1_Input/pfx8:pmid"/>
+                            </pmid>
+                        </Query>
+                        <Header>
+                            <xsl:if test="$CORESTAT_BEGIN/ns2:statEvent_output/ns2:result/ns2:transactionId">
+                                <x-traceid>
+                                    <xsl:value-of select="$CORESTAT_BEGIN/ns2:statEvent_output/ns2:result/ns2:transactionId"/>
+                                </x-traceid>
+                            </xsl:if>
+                        </Header>
+                        <Body/>
+                    </ns14:Parameters>
+                    <xsl:choose xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+                        <xsl:when test="(string-length($GetContext/root/ns5:processContext/ns5:messageContext/ns5:privateCtxt/*[local-name()='client_user_leah']) > 0)&#xA;and (string-length($GetContext/root/ns5:processContext/ns5:messageContext/ns5:privateCtxt/*[local-name()='client_pwd_leah']) > 0)">
+                            <xsl:if test="$GetContext/root/ns5:processContext/ns5:messageContext/ns5:privateCtxt/*[local-name()='client_user_leah']">
+                                <username>
+                                    <xsl:value-of select="$GetContext/root/ns5:processContext/ns5:messageContext/ns5:privateCtxt/*[local-name()='client_user_leah']"/>
+                                </username>
+                            </xsl:if>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <username>
+                                <xsl:value-of select="$_globalVariables/pfx:GlobalVariables/CIO_LEAHPartnerCardGet_Sync/Shared/RestUser"/>
+                            </username>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <xsl:choose xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+                        <xsl:when test="(string-length($GetContext/root/ns5:processContext/ns5:messageContext/ns5:privateCtxt/*[local-name()='client_user_leah']) > 0)&#xA;and (string-length($GetContext/root/ns5:processContext/ns5:messageContext/ns5:privateCtxt/*[local-name()='client_pwd_leah']) > 0)">
+                            <xsl:if test="$GetContext/root/ns5:processContext/ns5:messageContext/ns5:privateCtxt/*[local-name()='client_pwd_leah']">
+                                <password>
+                                    <xsl:value-of select="$GetContext/root/ns5:processContext/ns5:messageContext/ns5:privateCtxt/*[local-name()='client_pwd_leah']"/>
+                                </password>
+                            </xsl:if>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:if test="$Get-Rest-Password-GV/javaCodeActivityOutput/GvarPwd">
+                                <password>
+                                    <xsl:value-of select="$Get-Rest-Password-GV/javaCodeActivityOutput/GvarPwd"/>
+                                </password>
+                            </xsl:if>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </ns14:ActivityInput>
+            </pd:inputBindings>
+        </pd:activity>
+        <pd:activity name="LogConsultingReply">
+            <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+            <pd:resourceType>ae.process.subprocess</pd:resourceType>
+            <pd:x>940</pd:x>
+            <pd:y>240</pd:y>
+            <config>
+                <processName>/CORE_SERVICE/ProcessUtilities/LoggingPolicies/LogConsulting.process</processName>
+            </config>
+            <pd:inputBindings>
+                <in>
+                    <logCode>
+                        <xsl:value-of select="&quot;WS-RETRY-AUTO-REPLY&quot;"/>
+                    </logCode>
+                    <payload>
+                        <xsl:value-of select="tib:render-xml($Invoke-REST-API/ns14:RESTOutput, true(), true())"/>
+                    </payload>
+                </in>
+            </pd:inputBindings>
+        </pd:activity>
+        <pd:activity name="Catch">
+            <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
+            <pd:resourceType>ae.activities.catch</pd:resourceType>
+            <pd:x>581</pd:x>
+            <pd:y>370</pd:y>
+            <pd:handler>true</pd:handler>
+            <config>
+                <catchAll>true</catchAll>
+            </config>
+            <pd:inputBindings/>
+        </pd:activity>
+        <pd:activity name="CheckSysSoapHttp">
+            <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+            <pd:resourceType>ae.process.subprocess</pd:resourceType>
+            <pd:x>681</pd:x>
+            <pd:y>371</pd:y>
+            <config>
+                <processName>/CORE_COMMON/ProcessUtilities/SysUnavailability/CheckSysSoapHttp.process</processName>
+            </config>
+            <pd:inputBindings>
+                <input>
+                    <errorClass>
+                        <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="$_error/ns1:ErrorReport/Class"/>
+                    </errorClass>
+                </input>
+            </pd:inputBindings>
+        </pd:activity>
+        <pd:activity name="Set Status">
+            <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+            <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+            <pd:x>778</pd:x>
+            <pd:y>370</pd:y>
+            <config>
+                <variableName>SystemStatus</variableName>
+            </config>
+            <pd:inputBindings>
+                <SystemStatus>
+                    <Unavailable>
+                        <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="$SystemStatus/SystemStatus/Unavailable"/>
+                    </Unavailable>
+                </SystemStatus>
+            </pd:inputBindings>
+        </pd:activity>
+        <pd:activity name="BExxxx">
+            <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+            <pd:resourceType>ae.process.subprocess</pd:resourceType>
+            <pd:x>879</pd:x>
+            <pd:y>319</pd:y>
+            <config>
+                <processName>/CORE_COMMON/ProcessUtilities/ErrorHandling/BuildError.process</processName>
+            </config>
+            <pd:inputBindings>
+                <input>
+                    <ns3:bwBuildError>
+                        <ns3:eventException>
+                            <xsl:if test="$_error/ns1:ErrorReport/MsgCode">
+                                <ns3:code>
+                                    <xsl:value-of select="$_error/ns1:ErrorReport/MsgCode"/>
+                                </ns3:code>
+                            </xsl:if>
+                            <ns3:desc>
+                                <xsl:value-of select="$_error/ns1:ErrorReport/Msg"/>
+                            </ns3:desc>
+                            <ns3:shortDesc>
+                                <xsl:value-of select="&quot;System Unavailable&quot;"/>
+                            </ns3:shortDesc>
+                            <ns3:type>
+                                <xsl:value-of select="'T'"/>
+                            </ns3:type>
+                            <ns3:severity>
+                                <xsl:value-of select="2"/>
+                            </ns3:severity>
+                            <ns3:stackTrace>
+                                <xsl:value-of select="tib:render-xml($_error/ns1:ErrorReport, true(), true())"/>
+                            </ns3:stackTrace>
+                            <ns3:inputData xsi:nil="true"/>
+                            <ns3:debugData xsi:nil="true"/>
+                        </ns3:eventException>
+                    </ns3:bwBuildError>
+                </input>
+            </pd:inputBindings>
+        </pd:activity>
+        <pd:activity name="GExxxx">
+            <pd:type>com.tibco.pe.core.GenerateErrorActivity</pd:type>
+            <pd:resourceType>ae.activities.throw</pd:resourceType>
+            <pd:x>978</pd:x>
+            <pd:y>320</pd:y>
+            <config>
+                <faultName>Exception</faultName>
+            </config>
+            <pd:inputBindings>
+                <pfx4:ActivityInput>
+                    <data>
+                        <xsl:copy-of select="$BExxxx/output/ns3:bwException"/>
+                    </data>
+                </pfx4:ActivityInput>
+            </pd:inputBindings>
+        </pd:activity>
+        <pd:activity name="Rethrow">
+            <pd:type>com.tibco.pe.core.RethrowActivity</pd:type>
+            <pd:resourceType>ae.activities.rethrow</pd:resourceType>
+            <pd:x>909</pd:x>
+            <pd:y>415</pd:y>
+            <config/>
+            <pd:inputBindings/>
+        </pd:activity>
+    </pd:group>
+    <pd:activity name="Parse JSON">
+        <pd:type>com.tibco.plugin.json.activities.JSONParserActivity</pd:type>
+        <pd:resourceType>ae.activities.JSONParserActivity</pd:resourceType>
+        <pd:x>1300</pd:x>
+        <pd:y>141</pd:y>
+        <config>
+            <SchemaType>xsdType</SchemaType>
+            <BadgerfishCheck>false</BadgerfishCheck>
+            <ActivityOutputEditor ref="pfx8:ReplyPartnerCardGetV1_Output"/>
+        </config>
+        <pd:inputBindings>
+            <ns14:ActivityInputClass>
+                <jsonString>
+                    <xsl:value-of select="$Invoke-REST-API/ns14:RESTOutput/msg"/>
+                </jsonString>
+            </ns14:ActivityInputClass>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="ResponseEmpty">
+        <pd:type>com.tibco.plugin.mapper.MapperActivity</pd:type>
+        <pd:resourceType>ae.activities.MapperActivity</pd:resourceType>
+        <pd:x>1363</pd:x>
+        <pd:y>42</pd:y>
+        <config>
+            <element ref="pfx8:ReplyPartnerCardGetV1_Output"/>
+        </config>
+        <pd:inputBindings>
+            <pfx8:ReplyPartnerCardGetV1_Output/>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Null-1">
+        <pd:type>com.tibco.plugin.timer.NullActivity</pd:type>
+        <pd:resourceType>ae.activities.null</pd:resourceType>
+        <pd:x>1142</pd:x>
+        <pd:y>145</pd:y>
+        <config/>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="CatchBWE">
+        <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
+        <pd:resourceType>ae.activities.catch</pd:resourceType>
+        <pd:x>36</pd:x>
+        <pd:y>531</pd:y>
+        <pd:handler>true</pd:handler>
+        <config>
+            <fault>localname=bwException namespace=http://soa.coe.com/CommonTypes/Mediation/Framework/BWException</fault>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="GE-1">
+        <pd:type>com.tibco.pe.core.GenerateErrorActivity</pd:type>
+        <pd:resourceType>ae.activities.throw</pd:resourceType>
+        <pd:x>470</pd:x>
+        <pd:y>526</pd:y>
+        <config>
+            <faultName>Exception</faultName>
+        </config>
+        <pd:inputBindings>
+            <pfx4:ActivityInput>
+                <message>
+                    <xsl:value-of select="$_error/ns1:ErrorReport/Msg"/>
+                </message>
+                <messageCode>
+                    <xsl:value-of select="$_error/ns1:ErrorReport/MsgCode"/>
+                </messageCode>
+                <data>
+                    <xsl:for-each select="$CatchBWE/ns3:bwException">
+                        <ns3:bwException>
+                            <ns3:timeStamp>
+                                <xsl:value-of select="ns3:timeStamp"/>
+                            </ns3:timeStamp>
+                            <xsl:copy-of select="ns3:component"/>
+                            <xsl:copy-of select="ns3:process"/>
+                            <xsl:copy-of select="ns3:eventException"/>
+                            <ns3:syncResponseBody>
+                                <xsl:copy-of select="$Create-Error-Response/pfx3:Error"/>
+                            </ns3:syncResponseBody>
+                        </ns3:bwException>
+                    </xsl:for-each>
+                </data>
+            </pfx4:ActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>CORESTAT_END</pd:from>
+        <pd:to>Null-1</pd:to>
+        <pd:xpathDescription>Success</pd:xpathDescription>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-13369600</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>$Invoke-REST-API/ns14:RESTOutput/StatusCode="200"</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Init Status</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>CORESTAT_BEGIN</pd:from>
+        <pd:to>GetContext</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Init Status</pd:from>
+        <pd:to>Get Rest Password GV</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Get Rest Password GV</pd:from>
+        <pd:to>LogConsultingRequest</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>LogConsultingRequest</pd:from>
+        <pd:to>CORESTAT_BEGIN</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>GetContext</pd:from>
+        <pd:to>Group</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>CORESTAT_END</pd:from>
+        <pd:to>End</pd:to>
+        <pd:xpathDescription>Error</pd:xpathDescription>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-65536</pd:lineColor>
+        <pd:conditionType>otherwise</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Group</pd:from>
+        <pd:to>CORESTAT_END</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Parse JSON</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Null-1</pd:from>
+        <pd:to>ResponseEmpty</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>otherwise</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Null-1</pd:from>
+        <pd:to>Parse JSON</pd:to>
+        <pd:xpathDescription>Has Body notnull</pd:xpathDescription>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16776961</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>$Invoke-REST-API/ns14:RESTOutput/msg!="null"</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>ResponseEmpty</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Create Error Response</pd:from>
+        <pd:to>CORESTAT_FAULT</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>CatchBWE</pd:from>
+        <pd:to>Create Error Response</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>CORESTAT_FAULT</pd:from>
+        <pd:to>GE-1</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:label>
+        <pd:name>Label (1)</pd:name>
+        <pd:description>Implement here a specific action that you will call in your main process.</pd:description>
+        <pd:x>213</pd:x>
+        <pd:y>430</pd:y>
+        <pd:width>404</pd:width>
+        <pd:height>54</pd:height>
+        <pd:fontColor>-16777216</pd:fontColor>
+        <pd:color>-26368</pd:color>
+        <pd:type>solid</pd:type>
+        <pd:thickness>0</pd:thickness>
+        <pd:fade>true</pd:fade>
+    </pd:label>
+    <pd:label>
+        <pd:name>Label (1) (1)</pd:name>
+        <pd:description>Into the action operation process, you have to catch properly the error (technical/functional),  encapsulate it to a GE Exception (Framework) and throw it to the main process
+
+YOU have to update activities input data (mapping, job vars, Exception,etc.)</pd:description>
+        <pd:x>305</pd:x>
+        <pd:y>651</pd:y>
+        <pd:width>513</pd:width>
+        <pd:height>107</pd:height>
+        <pd:fontColor>-16777216</pd:fontColor>
+        <pd:color>-52480</pd:color>
+        <pd:type>solid</pd:type>
+        <pd:thickness>0</pd:thickness>
+        <pd:fade>true</pd:fade>
+    </pd:label>
+    <pd:label>
+        <pd:name>Label (1) (1) (1)</pd:name>
+        <pd:description>Piece of Advices: 
+Remove the Corestat components if there are not interest to use them into the current process.
+
+Please update all the fields into the core-stat components to be conformed with your needs.</pd:description>
+        <pd:x>193</pd:x>
+        <pd:y>66</pd:y>
+        <pd:width>369</pd:width>
+        <pd:height>114</pd:height>
+        <pd:fontName>Dialog.bold-plain-12</pd:fontName>
+        <pd:fontColor>-16777216</pd:fontColor>
+        <pd:color>-52480</pd:color>
+        <pd:type>solid</pd:type>
+        <pd:thickness>0</pd:thickness>
+        <pd:fade>true</pd:fade>
+    </pd:label>
+</pd:ProcessDefinition>

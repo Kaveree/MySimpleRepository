@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.tibco.com/schemas/CIO_LEAHPartnerCardGet_Sync/CIO_LEAHPartnerCardGet_Sync/v1/Resources/Schemas/XSD/CIO_LEAHPartnerCardGet_Sync.xsd"
+	 targetNamespace="http://www.tibco.com/schemas/CIO_LEAHPartnerCardGet_Sync/CIO_LEAHPartnerCardGet_Sync/v1/Resources/Schemas/XSD/CIO_LEAHPartnerCardGet_Sync.xsd"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="partnerCard_V1_Input">
+			<xs:complexType>
+			<xs:all>
+			<xs:element name="pmid" type="xs:string"/>
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+
+<xs:element name="ReplyPartnerCardGetV1_Output">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="mapCard" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:all>
+							<xs:element name="appDeliveryType" type="xs:string" minOccurs="0"/>
+							<xs:element name="enrollmentCode" type="xs:string" minOccurs="0"/>
+							<xs:element name="levelCode" type="xs:string"/>
+							<xs:element name="loyaltyMembershipType" type="xs:string"/>
+							<xs:element name="memExpirationDate" type="xs:string"/>
+							<xs:element name="memberNumber" type="xs:string"/>
+							<xs:element name="orsId" type="xs:string" minOccurs="0"/>
+							<xs:element name="submissionDate" type="xs:string" minOccurs="0"/>
+						</xs:all>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ReplyPartnerCardGetErrorV1_Output">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="code" type="xs:string" minOccurs="0"/>
+				<xs:element name="field" type="xs:string" minOccurs="0"/>
+				<xs:element name="message" type="xs:string" minOccurs="0"/>
+				<xs:element name="details" type="xs:string" minOccurs="0"/>
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

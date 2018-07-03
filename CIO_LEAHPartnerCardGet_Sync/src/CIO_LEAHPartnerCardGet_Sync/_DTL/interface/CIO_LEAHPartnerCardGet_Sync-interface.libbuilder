@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Repository:repository xmlns:Repository="http://www.tibco.com/xmlns/repo/types/2002">
+    <name name="CIO_LEAHPartnerCardGet_Sync-interface">
+        <version>2</version>
+        <author>%%TIBUnit/author%%</author>
+        <fileLocation>./target/CIO_LEAHPartnerCardGet_Sync-interface.projlib</fileLocation>
+        <resources>/CIO_LEAHPartnerCardGet_Sync/v1/Resources/Schemas/XSD/CIO_LEAHPartnerCardGet_Sync.xsd,/CIO_LEAHPartnerCardGet_Sync/v1/Resources/Schemas/XSD/Get_CIO_LEAHPartnerCardGet_Sync_v1.xsd</resources>
+    </name>
+</Repository:repository>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Repository:repository xmlns:Repository="http://www.tibco.com/xmlns/repo/types/2002">
+    <name name="CIO_LEAHPartnerCardGet_Sync">
+        <version>2</version>
+        <author>%%TIBUnit/author%%</author>
+        <fileLocation>./target/CIO_LEAHPartnerCardGet_Sync.projlib</fileLocation>
+        <resources>/CIO_LEAHPartnerCardGet_Sync/v1/Services/Starters/LEAHPartnerCardGet_XML_JMS_InternalSync.process</resources>
+    </name>
+</Repository:repository>

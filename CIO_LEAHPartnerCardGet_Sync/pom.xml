@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.accorhotels.esb.customer.default.projects</groupId>
+	<artifactId>CIO_LEAHPartnerCardGet_Sync</artifactId>
+	<version>1.0.3-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	
+	<parent>
+		<groupId>com.tibco.esb</groupId>
+		<artifactId>parent</artifactId>
+		<version>1.0.2</version>
+		<relativePath>../Parent</relativePath>
+	</parent>
+
+	<properties>
+		<bwProjectRelativePath>/src/CIO_LEAHPartnerCardGet_Sync</bwProjectRelativePath>
+		<businessDomain>customer</businessDomain>
+		<objectName>PartnerCard</objectName>
+		<operation>Get</operation>
+		<subDomain>default</subDomain>
+		<projectType>Components/customer/default</projectType>
+	</properties>
+	
+	<modules>
+        <module>${bwProjectRelativePath}/_DTL/component</module>
+        <module>${bwProjectRelativePath}/_DTL/interface</module>
+    </modules>
+
+	<scm>
+		<connection>scm:svn:http://svn.accor.net:7770/EXCH-SYS/ESB/trunk/Components/customer/default/CIO_LEAHPartnerCardGet_Sync</connection>
+		<developerConnection>scm:svn:http://svn.accor.net:7770/EXCH-SYS/ESB/trunk/Components/customer/default/CIO_LEAHPartnerCardGet_Sync</developerConnection>
+		<url>http://svn.accor.net:7770/EXCH-SYS/ESB/trunk/Components/customer/default/CIO_LEAHPartnerCardGet_Sync</url>
+	</scm>
+	
+	<!-- DTLs' dependencies -->
+	<dependencies>
+		<!-- Framework -->
+		<!-- 
+			ATTENTION !!!! 
+			WARNING !!!!	
+		 -->
+		<dependency>
+			<groupId>com.tibco.esb.framework.dtl</groupId>
+			<artifactId>core-bwpm</artifactId>
+			<version>1.9.1</version>
+			<type>bwdtl</type>
+		</dependency>
+		<!-- 
+			La section précedente concernant core-bwpm doit rester en haut de la liste des dépendances !
+			The previous section about core-bwpm should remain on the top of the dependencies list !
+		 -->
+
+		<dependency>
+			<groupId>com.tibco.esb.framework.dtl</groupId>
+			<artifactId>core-common</artifactId>
+			<version>1.7.1</version>
+			<type>bwdtl</type>
+		</dependency>
+		<dependency>
+			<groupId>com.tibco.esb.framework.dtl</groupId>
+			<artifactId>core-service</artifactId>
+			<version>1.9.2</version>
+			<type>bwdtl</type>
+		</dependency>
+		<dependency>
+			<groupId>com.tibco.esb.framework.dtl</groupId>
+			<artifactId>core-stat</artifactId>
+			<version>1.0.9</version>
+			<type>bwdtl</type>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.tibco.maven.plugins</groupId>
+				<artifactId>bwfactory-maven-plugin</artifactId>
+				<version>3.0.0</version>
+				<extensions>true</extensions>
+				<configuration>
+					<!-- Set flag to "true" to skip TIBUnit tests (not recommended) -->
+					<skipTests>true</skipTests>
+					<bwProjectPath>${project.basedir}${bwProjectRelativePath}</bwProjectPath>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

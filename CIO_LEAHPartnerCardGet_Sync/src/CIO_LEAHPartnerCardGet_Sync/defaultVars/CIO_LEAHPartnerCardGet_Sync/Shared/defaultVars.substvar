@@ -1,0 +1,37 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<repository xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xmlns = "http://www.tibco.com/xmlns/repo/types/2002">
+	<globalVariables>
+		<globalVariable>
+			<name>Hostname</name>
+			<value>http://rec-loyalty-services.accor.net</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1519980613013</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>RestPassword</name>
+			<value>#!zAVmcARMsE76AFyjk4r4ONQkVn1QEKGto+Wdutv4y4I=</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>Password</type>
+			<modTime>1519637139258</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>RestUser</name>
+			<value>wsexterne</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1519637138360</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>TrustHTTPSHost</name>
+			<value>false</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>Boolean</type>
+			<modTime>1519637137860</modTime>
+		</globalVariable>
+	</globalVariables>
+</repository>

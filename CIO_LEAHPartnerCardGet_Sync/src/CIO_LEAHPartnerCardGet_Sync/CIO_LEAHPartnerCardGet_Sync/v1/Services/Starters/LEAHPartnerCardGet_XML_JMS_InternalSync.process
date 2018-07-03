@@ -1,0 +1,671 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns14="http://soa.coe.com/infra/mediation/CommonServices/StatEventEnd" xmlns:ns="http://www.tibco.com/pe/DeployedVarsType" xmlns:ns15="http://soa.coe.com/infra/mediation/CommonServices/StatEventFault" xmlns:ns22="${namespaceXSD}" xmlns:ns5="http://www.tibco.com/pe/EngineTypes" xmlns:ns12="http://soa.coe.com/CommonTypes/Mediation/BWProcessContext" xmlns:ns6="http://soa.coe.com/CommonTypes/Mediation/Framework/BWException" xmlns:ns13="http://soa.coe.com/infra/mediation/CommonServices/StatEventBegin" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns2="http://soa.coe.com/CommonTypes/Mediation/Framework" xmlns:ns1="http://www.tibco.com/namespaces/tnt/plugins/jms" xmlns:ns4="http://soa.coe.com/infra/mediation/CommonServices/StatEvent" xmlns:bwCustomFunctions="java://com.tibco.tibcobw.customfunctions.bwCustomFunctions" xmlns:ns3="http://soa.coe.com/CommonTypes/Mediation/xmlMsg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <pd:name>CIO_LEAHPartnerCardGet_Sync/v1/Services/Starters/LEAHPartnerCardGet_XML_JMS_InternalSync.process</pd:name>
+    <pd:startName>JMS Queue Receiver</pd:startName>
+    <pd:startX>0</pd:startX>
+    <pd:startY>0</pd:startY>
+    <pd:returnBindings/>
+    <pd:starter name="JMS Queue Receiver">
+        <pd:type>com.tibco.plugin.jms.JMSQueueEventSource</pd:type>
+        <pd:resourceType>ae.activities.JMSQueueEventSource</pd:resourceType>
+        <pd:x>65</pd:x>
+        <pd:y>261</pd:y>
+        <config>
+            <PermittedMessageType>Text</PermittedMessageType>
+            <SessionAttributes>%%CIO_LEAHBurn4StaySimulate_Sync/v1/Services/Starters/LEAHBurn4StaySimulate_XML_JMS_InternalSync/DestinationQueue%%2%%CIO_LEAHBurn4StaySimulate_Sync/v1/Services/Starters/LEAHBurn4StaySimulate_XML_JMS_InternalSync/MaxSession%%%%CIO_LEAHBurn4StaySimulate_Sync/v1/Services/Starters/LEAHBurn4StaySimulate_XML_JMS_InternalSync/ReceiverTimeout%%<destination>%%CIO_LEAHPartnerCardGet_Sync/v1/Services/Starters/LEAHPartnerCardGet_XML_JMS_InternalSync/DestinationQueue%%</destination>
+                <acknowledgeMode>2</acknowledgeMode>
+                <maxSessions>%%CIO_LEAHPartnerCardGet_Sync/v1/Services/Starters/LEAHPartnerCardGet_XML_JMS_InternalSync/MaxSession%%</maxSessions>
+                <receiverTimeout>%%CIO_LEAHPartnerCardGet_Sync/v1/Services/Starters/LEAHPartnerCardGet_XML_JMS_InternalSync/ReceiverTimeout%%</receiverTimeout>
+            </SessionAttributes>
+            <ConfigurableHeaders>
+                <JMSDeliveryMode>PERSISTENT</JMSDeliveryMode>
+                <JMSExpiration>0</JMSExpiration>
+                <JMSPriority>4</JMSPriority>
+            </ConfigurableHeaders>
+            <ConnectionReference>/CORE_COMMON/Resources/Connection/JMS/JMS_MSG.sharedjmscon</ConnectionReference>
+        </config>
+        <pd:inputBindings/>
+    </pd:starter>
+    <pd:endName>End</pd:endName>
+    <pd:endX>1517</pd:endX>
+    <pd:endY>273</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://accorhotels.com/CIO_LEAHPartnerCardGet_Sync/v1/Services/Starters/LEAHPartnerCardGet_Sync_XML_JMS_InternalSync</pd:targetNamespace>
+    <pd:activity name="Ctx_Xml">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>395</pd:x>
+        <pd:y>264</pd:y>
+        <config>
+            <processName>/CORE_SERVICE/ProcessUtilities/ProcessCtx/Ctx_Xml.process</processName>
+        </config>
+        <pd:inputBindings>
+            <Input>
+                <overwrite_serviceId>
+                    <xsl:value-of select="bwCustomFunctions:getGUID()"/>
+                </overwrite_serviceId>
+                <overwrite_serviceCode>
+                    <xsl:value-of select="$_globalVariables/ns:GlobalVariables/CIO_LEAHPartnerCardGet_Sync/v1/ServiceCode"/>
+                </overwrite_serviceCode>
+                <body>
+                    <xsl:value-of select="$JMS-Queue-Receiver/ns1:ActivityOutput/Body"/>
+                </body>
+                <msgType>
+                    <xsl:value-of select="&quot;XMLMSG_JMS&quot;"/>
+                </msgType>
+                <ns12:msgProperties>
+                    <ns2:nvpList>
+                        <ns2:nvpElement>
+                            <xsl:attribute xmlns:xsl="http://www.w3.org/1999/XSL/Transform" name="name">
+                                <xsl:value-of select="&quot;CORE_STAT_CORRID&quot;"/>
+                            </xsl:attribute>
+                            <xsl:attribute xmlns:xsl="http://www.w3.org/1999/XSL/Transform" name="value">
+                                <xsl:value-of select="$CORESTAT_setGUID/corestat/guid"/>
+                            </xsl:attribute>
+                        </ns2:nvpElement>
+                        <xsl:for-each xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="$JMS-Queue-Receiver/ns1:ActivityOutput/*/*">
+                            <ns2:nvpElement>
+                                <xsl:attribute name="name">
+                                    <xsl:value-of select="local-name()"/>
+                                </xsl:attribute>
+                                <xsl:attribute name="value">
+                                    <xsl:value-of select="."/>
+                                </xsl:attribute>
+                            </ns2:nvpElement>
+                        </xsl:for-each>
+                    </ns2:nvpList>
+                </ns12:msgProperties>
+            </Input>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="LogOnEntry">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>649</pd:x>
+        <pd:y>271</pd:y>
+        <config>
+            <processName>/CORE_SERVICE/ProcessUtilities/LoggingPolicies/LogOnEntry.process</processName>
+        </config>
+        <pd:inputBindings>
+            <in>
+                <isStartExchange>
+                    <xsl:value-of select="false()"/>
+                </isStartExchange>
+                <ns12:technicalContext>
+                    <ns2:nvpList>
+                        <ns2:nvpElement>
+                            <xsl:attribute xmlns:xsl="http://www.w3.org/1999/XSL/Transform" name="name">
+                                <xsl:value-of select="&quot;CORE_STAT_CORRID&quot;"/>
+                            </xsl:attribute>
+                            <xsl:attribute xmlns:xsl="http://www.w3.org/1999/XSL/Transform" name="value">
+                                <xsl:value-of select="$CORESTAT_setGUID/corestat/guid"/>
+                            </xsl:attribute>
+                        </ns2:nvpElement>
+                    </ns2:nvpList>
+                </ns12:technicalContext>
+            </in>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="LogOnExit">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>1113</pd:x>
+        <pd:y>275</pd:y>
+        <config>
+            <processName>/CORE_SERVICE/ProcessUtilities/LoggingPolicies/LogOnExit.process</processName>
+        </config>
+        <pd:inputBindings>
+            <in>
+                <isEndExchange>
+                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="false()"/>
+                </isEndExchange>
+            </in>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Main">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>772</pd:x>
+        <pd:y>270</pd:y>
+        <config>
+            <processName>/CIO_LEAHPartnerCardGet_Sync/v1/Services/Operations/Get/Business/Main.process</processName>
+        </config>
+        <pd:inputBindings>
+            <ns2:InputData>
+                <xsl:copy-of select="$Ctx_Xml/Output/anyBody/*"/>
+            </ns2:InputData>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Prepare XML OK reply">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>884</pd:x>
+        <pd:y>278</pd:y>
+        <config>
+            <processName>/CORE_SERVICE/ProcessUtilities/xmlMsgSend/Reply To Send Jms Sync.process</processName>
+        </config>
+        <pd:inputBindings>
+            <Input>
+                <Body>
+                    <xsl:copy-of select="$Main/ns2:OutputData/*"/>
+                </Body>
+            </Input>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Reply OK to JMS Message">
+        <pd:type>com.tibco.plugin.jms.JMSReplyActivity</pd:type>
+        <pd:resourceType>ae.activities.JMSReplyActivity</pd:resourceType>
+        <pd:x>997</pd:x>
+        <pd:y>280</pd:y>
+        <config>
+            <PermittedMessageType>Text</PermittedMessageType>
+            <SessionAttributes>
+                <transacted>false</transacted>
+                <acknowledgeMode>1</acknowledgeMode>
+                <maxSessions>1</maxSessions>
+            </SessionAttributes>
+            <ConfigurableHeaders>
+                <JMSDeliveryMode>PERSISTENT</JMSDeliveryMode>
+                <JMSExpiration>0</JMSExpiration>
+                <JMSPriority>4</JMSPriority>
+                <EventSource>JMS Queue Receiver</EventSource>
+            </ConfigurableHeaders>
+        </config>
+        <pd:inputBindings>
+            <ns1:ActivityInput>
+                <Body>
+                    <xsl:value-of select="tib:render-xml($Prepare-XML-OK-reply/ns3:xmlMsg, true(), true())"/>
+                </Body>
+            </ns1:ActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Confirm OK">
+        <pd:type>com.tibco.pe.core.ConfirmActivity</pd:type>
+        <pd:resourceType>activity.confirm</pd:resourceType>
+        <pd:x>1228</pd:x>
+        <pd:y>276</pd:y>
+        <config>
+            <ConfirmEvent>JMS Queue Receiver</ConfirmEvent>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="CORESTAT_BEGIN">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>522</pd:x>
+        <pd:y>267</pd:y>
+        <config>
+            <processName>/CORE_STAT/ProcessUtilities/Shared/Statistic/CORESTAT_BEGIN.process</processName>
+        </config>
+        <pd:inputBindings>
+            <ns13:statEvent_input>
+                <ns13:begin>
+                    <ns13:params>
+                        <ns13:param>
+                            <ns13:key>
+                                <xsl:value-of select="&quot;LEVEL&quot;"/>
+                            </ns13:key>
+                            <ns13:value>
+                                <xsl:value-of select="&quot;Simulate/Starters&quot;"/>
+                            </ns13:value>
+                        </ns13:param>
+                        <ns13:param>
+                            <ns13:key>
+                                <xsl:value-of select="&quot;CORRID&quot;"/>
+                            </ns13:key>
+                            <ns13:value>
+                                <xsl:value-of select="bwCustomFunctions:getUUIDNoDashes()"/>
+                            </ns13:value>
+                        </ns13:param>
+                    </ns13:params>
+                    <ns13:sourceName>
+                        <xsl:value-of select="&quot;BW&quot;"/>
+                    </ns13:sourceName>
+                    <ns13:applicationName>
+                        <xsl:value-of select="$_globalVariables/ns:GlobalVariables/CIO_LEAHPartnerCardGet_Sync/v1/ServiceCode"/>
+                    </ns13:applicationName>
+                    <ns13:subject>
+                        <xsl:value-of select="&quot;STARTER-CIO_LEAHPartnerCardGet_Sync_v1-Get&quot;"/>
+                    </ns13:subject>
+                    <ns13:analyseType>
+                        <xsl:value-of select="&quot;JMS_SYNC&quot;"/>
+                    </ns13:analyseType>
+                </ns13:begin>
+            </ns13:statEvent_input>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="CORESTAT_setGUID">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>251</pd:x>
+        <pd:y>263</pd:y>
+        <config>
+            <processName>/CORE_STAT/ProcessUtilities/Shared/Statistic/CORESTAT_setGUID.process</processName>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="CORESTAT_END">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>1361</pd:x>
+        <pd:y>277</pd:y>
+        <config>
+            <processName>/CORE_STAT/ProcessUtilities/Shared/Statistic/CORESTAT_END.process</processName>
+        </config>
+        <pd:inputBindings>
+            <ns14:statEvent_input>
+                <ns14:end>
+                    <ns14:sourceName>
+                        <xsl:value-of select="&quot;BW&quot;"/>
+                    </ns14:sourceName>
+                    <ns14:correlationId>
+                        <xsl:value-of select="$CORESTAT_BEGIN/ns4:statEvent_output/ns4:result/ns4:correlationId"/>
+                    </ns14:correlationId>
+                </ns14:end>
+            </ns14:statEvent_input>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Ctx_Xml_Err">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>681</pd:x>
+        <pd:y>112</pd:y>
+        <config>
+            <processName>/CORE_SERVICE/ProcessUtilities/ProcessCtx/Ctx_Xml_Err.process</processName>
+        </config>
+        <pd:inputBindings>
+            <Input>
+                <exchangeCode>
+                    <xsl:value-of select="$_globalVariables/ns:GlobalVariables/CIO_LEAHPartnerCardGet_Sync/v1/Services/Operations/Get/ExchangeCode"/>
+                </exchangeCode>
+                <serviceCode>
+                    <xsl:value-of select="$_globalVariables/ns:GlobalVariables/CIO_LEAHPartnerCardGet_Sync/v1/ServiceCode"/>
+                </serviceCode>
+                <msgType>
+                    <xsl:value-of select="&quot;XMLMSG_JMS&quot;"/>
+                </msgType>
+                <ns12:msgProperties>
+                    <ns2:nvpList>
+                        <ns2:nvpElement>
+                            <xsl:attribute xmlns:xsl="http://www.w3.org/1999/XSL/Transform" name="name">
+                                <xsl:value-of select="&quot;JMSDestination&quot;"/>
+                            </xsl:attribute>
+                            <xsl:attribute xmlns:xsl="http://www.w3.org/1999/XSL/Transform" name="value">
+                                <xsl:value-of select="$_globalVariables/ns:GlobalVariables/CIO_LEAHPartnerCardGet_Sync/v1/Services/Starters/LEAHPartnerCardGet_XML_JMS_InternalSync/DestinationQueue"/>
+                            </xsl:attribute>
+                        </ns2:nvpElement>
+                    </ns2:nvpList>
+                </ns12:msgProperties>
+                <nativeError>
+                    <xsl:copy-of select="$_error/ns5:ErrorReport"/>
+                </nativeError>
+            </Input>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Catch-BWE">
+        <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
+        <pd:resourceType>ae.activities.catch</pd:resourceType>
+        <pd:x>802</pd:x>
+        <pd:y>414</pd:y>
+        <pd:handler>true</pd:handler>
+        <config>
+            <fault>localname=bwException namespace=http://soa.coe.com/CommonTypes/Mediation/Framework/BWException</fault>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="LogOnError">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>926</pd:x>
+        <pd:y>416</pd:y>
+        <config>
+            <processName>/CORE_SERVICE/ProcessUtilities/LoggingPolicies/LogOnError.process</processName>
+        </config>
+        <pd:inputBindings>
+            <Input>
+                <xsl:choose xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+                    <xsl:when test="count($Catch-BWE/ns6:bwException)>0">
+                        <xsl:copy-of select="$Catch-BWE/ns6:bwException"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:copy-of select="$BuildError/output/ns6:bwException"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+                <canSetExchangeInError>
+                    <xsl:value-of select="true()"/>
+                </canSetExchangeInError>
+            </Input>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Prepare XML KO reply">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>1062</pd:x>
+        <pd:y>423</pd:y>
+        <config>
+            <processName>/CORE_SERVICE/ProcessUtilities/xmlMsgSend/Reply To Send Jms Sync.process</processName>
+        </config>
+        <pd:inputBindings>
+            <Input>
+                <xsl:choose xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+                    <xsl:when test="count($Catch-BWE/ns6:bwException)>0">
+                        <xsl:choose>
+                            <xsl:when test="count($Catch-BWE/ns6:bwException/ns6:syncResponseBody)>0">
+                                <Body>
+                                    <xsl:copy-of select="$Catch-BWE/ns6:bwException/ns6:syncResponseBody/*"/>
+                                </Body>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <Body>
+                                    <xsl:copy-of select="$_error/ns5:ErrorReport/Msg"/>
+                                </Body>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <Body>
+                            <xsl:choose>
+                                <xsl:when test="count($BuildError/output/ns6:bwException/ns6:syncResponseBody)>0">
+                                    <xsl:copy-of select="$BuildError/output/ns6:bwException/ns6:syncResponseBody/*"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:copy-of select="$_error/ns5:ErrorReport/Msg"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </Body>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </Input>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Reply KO to JMS Message">
+        <pd:type>com.tibco.plugin.jms.JMSReplyActivity</pd:type>
+        <pd:resourceType>ae.activities.JMSReplyActivity</pd:resourceType>
+        <pd:x>1206</pd:x>
+        <pd:y>425</pd:y>
+        <config>
+            <PermittedMessageType>Text</PermittedMessageType>
+            <SessionAttributes>
+                <transacted>false</transacted>
+                <acknowledgeMode>1</acknowledgeMode>
+                <maxSessions>1</maxSessions>
+            </SessionAttributes>
+            <ConfigurableHeaders>
+                <JMSDeliveryMode>PERSISTENT</JMSDeliveryMode>
+                <JMSExpiration>0</JMSExpiration>
+                <JMSPriority>4</JMSPriority>
+                <EventSource>JMS Queue Receiver</EventSource>
+            </ConfigurableHeaders>
+        </config>
+        <pd:inputBindings>
+            <ns1:ActivityInput>
+                <Body>
+                    <xsl:value-of select="tib:render-xml($Prepare-XML-KO-reply/ns3:xmlMsg, true(), true())"/>
+                </Body>
+            </ns1:ActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Confirm KO">
+        <pd:type>com.tibco.pe.core.ConfirmActivity</pd:type>
+        <pd:resourceType>activity.confirm</pd:resourceType>
+        <pd:x>1334</pd:x>
+        <pd:y>418</pd:y>
+        <config>
+            <ConfirmEvent>JMS Queue Receiver</ConfirmEvent>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="CORESTAT_FAULT">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>1475</pd:x>
+        <pd:y>414</pd:y>
+        <config>
+            <processName>/CORE_STAT/ProcessUtilities/Shared/Statistic/CORESTAT_FAULT.process</processName>
+        </config>
+        <pd:inputBindings>
+            <ns15:statEvent_input>
+                <ns15:fault>
+                    <ns15:sourceName>
+                        <xsl:value-of select="&quot;BW&quot;"/>
+                    </ns15:sourceName>
+                    <ns15:correlationId>
+                        <xsl:value-of select="$CORESTAT_BEGIN/ns4:statEvent_output/ns4:result/ns4:correlationId"/>
+                    </ns15:correlationId>
+                </ns15:fault>
+            </ns15:statEvent_input>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="BuildError">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>926</pd:x>
+        <pd:y>553</pd:y>
+        <config>
+            <processName>/CORE_COMMON/ProcessUtilities/ErrorHandling/BuildError.process</processName>
+        </config>
+        <pd:inputBindings>
+            <input>
+                <ns6:bwBuildError>
+                    <ns6:eventException>
+                        <ns6:code>
+                            <xsl:value-of select="$_error/ns5:ErrorReport/MsgCode"/>
+                        </ns6:code>
+                        <ns6:desc>
+                            <xsl:value-of select="$_error/ns5:ErrorReport/Msg"/>
+                        </ns6:desc>
+                        <ns6:shortDesc>
+                            <xsl:value-of select="&quot;Unexpected Exception caught&quot;"/>
+                        </ns6:shortDesc>
+                        <ns6:type>
+                            <xsl:value-of select="&quot;T&quot;"/>
+                        </ns6:type>
+                        <ns6:severity>
+                            <xsl:value-of select="4"/>
+                        </ns6:severity>
+                        <ns6:stackTrace>
+                            <xsl:value-of select="tib:render-xml($_error, true(), true())"/>
+                        </ns6:stackTrace>
+                        <ns6:inputData>
+                            <xsl:value-of select="tib:render-xml($JMS-Queue-Receiver/ns1:ActivityOutput, true(), true())"/>
+                        </ns6:inputData>
+                        <ns6:debugData xsi:nil="true"/>
+                    </ns6:eventException>
+                </ns6:bwBuildError>
+                <ns6:syncResponseBody>
+                    <ns22:Error>
+                        <xsl:value-of select="&quot;Unexpected Error in Main&quot;"/>
+                    </ns22:Error>
+                </ns6:syncResponseBody>
+            </input>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Catch">
+        <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
+        <pd:resourceType>ae.activities.catch</pd:resourceType>
+        <pd:x>801</pd:x>
+        <pd:y>551</pd:y>
+        <pd:handler>true</pd:handler>
+        <config>
+            <catchAll>true</catchAll>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="Ignore Error">
+        <pd:type>com.tibco.plugin.timer.NullActivity</pd:type>
+        <pd:resourceType>ae.activities.null</pd:resourceType>
+        <pd:x>1208</pd:x>
+        <pd:y>550</pd:y>
+        <config/>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>JMS Queue Receiver</pd:from>
+        <pd:to>CORESTAT_setGUID</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>CORESTAT_setGUID</pd:from>
+        <pd:to>Ctx_Xml</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Ctx_Xml</pd:from>
+        <pd:to>CORESTAT_BEGIN</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>CORESTAT_BEGIN</pd:from>
+        <pd:to>LogOnEntry</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>LogOnEntry</pd:from>
+        <pd:to>Main</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Main</pd:from>
+        <pd:to>Prepare XML OK reply</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Prepare XML OK reply</pd:from>
+        <pd:to>Reply OK to JMS Message</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Reply OK to JMS Message</pd:from>
+        <pd:to>LogOnExit</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>LogOnExit</pd:from>
+        <pd:to>Confirm OK</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Confirm OK</pd:from>
+        <pd:to>CORESTAT_END</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>CORESTAT_END</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Ctx_Xml_Err</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>JMS Queue Receiver</pd:from>
+        <pd:to>Ctx_Xml_Err</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-65536</pd:lineColor>
+        <pd:conditionType>error</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Catch-BWE</pd:from>
+        <pd:to>LogOnError</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>LogOnError</pd:from>
+        <pd:to>Prepare XML KO reply</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Prepare XML KO reply</pd:from>
+        <pd:to>Reply KO to JMS Message</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Reply KO to JMS Message</pd:from>
+        <pd:to>Confirm KO</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Confirm KO</pd:from>
+        <pd:to>CORESTAT_FAULT</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>CORESTAT_FAULT</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>BuildError</pd:from>
+        <pd:to>LogOnError</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Prepare XML KO reply</pd:from>
+        <pd:to>Ignore Error</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-65485</pd:lineColor>
+        <pd:conditionType>error</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Reply KO to JMS Message</pd:from>
+        <pd:to>Ignore Error</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-65536</pd:lineColor>
+        <pd:conditionType>error</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Ignore Error</pd:from>
+        <pd:to>Confirm KO</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Catch</pd:from>
+        <pd:to>BuildError</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

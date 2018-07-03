@@ -1,0 +1,45 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<repository xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xmlns = "http://www.tibco.com/xmlns/repo/types/2002">
+	<globalVariables>
+		<globalVariable>
+			<name>author</name>
+			<value>TO_BE_UPDATED</value>
+			<deploymentSettable>false</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1344330430070</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>description</name>
+			<value>TO_BE_UPDATED</value>
+			<deploymentSettable>false</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1344330430070</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>projectDirectory</name>
+			<value>TO_BE_UPDATED</value>
+			<deploymentSettable>false</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1344330430070</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>relativeReportsDirectory</name>
+			<value>../../target/reports</value>
+			<deploymentSettable>false</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1344330430070</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>version</name>
+			<value>TO_BE_UPDATED</value>
+			<deploymentSettable>false</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1344330430070</modTime>
+		</globalVariable>
+	</globalVariables>
+</repository>

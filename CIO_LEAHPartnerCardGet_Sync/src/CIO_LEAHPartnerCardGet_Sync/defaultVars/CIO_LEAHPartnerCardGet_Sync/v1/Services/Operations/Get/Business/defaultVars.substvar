@@ -1,0 +1,22 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<repository xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xmlns = "http://www.tibco.com/xmlns/repo/types/2002">
+	<globalVariables>
+		<globalVariable>
+			<name>.</name>
+			<value></value>
+			<deploymentSettable>false</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1344262455532</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>propagateException</name>
+			<value>false</value>
+			<description>Throw Exception(s) from the business process to the starter process (useful for async processes)</description>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>Boolean</type>
+			<modTime>1493823048844</modTime>
+		</globalVariable>
+	</globalVariables>
+</repository>
